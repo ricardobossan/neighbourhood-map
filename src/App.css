@@ -1,3 +1,7 @@
+header {
+  height: 10vh;
+}
+
 .App {
   text-align: center;
 }
@@ -22,6 +26,10 @@
   color: #61dafb;
 }
 
+.map {
+  position: fixed;
+}
+/* 
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -30,3 +38,4 @@
     transform: rotate(360deg);
   }
 }
+ */

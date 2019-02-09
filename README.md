@@ -66,3 +66,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+## Links:
+[maps_no_library]:https://cuneyt.aliustaoglu.biz/en/using-google-maps-in-react-without-custom-libraries/ "Using Google Maps in React without custom libraries"
