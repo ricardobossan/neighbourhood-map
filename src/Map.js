@@ -6,15 +6,20 @@ class Map extends Component {
     const map = new window.google.maps.Map(
       document.getElementById(this.props.id),
       this.props.options);
-    this.loadMarker(map)
+    this.loadMarkers(map)
   }
 
-  loadMarker(map) {
-    const marker = new window.google.maps.Marker({
-    position: { lat: -22.905015, lng: -43.111642 },
-    map: map,
-    title: 'Icaraí'
-    })    
+  /**
+   * Iterate over locations and add markers to them
+   */
+  loadMarkers(map) {
+    this.props.locations.map((location) => {
+      const marker = new window.google.maps.Marker({
+      position: { lat: location.lat, lng: location.lng },
+      map: map,
+      title: location.title
+      })    
+    })
   }
 
   componentDidMount() {
@@ -24,8 +29,6 @@ class Map extends Component {
       script.src = `https://maps.google.com/maps/api/js?key=AIzaSyCVQUeNoVu_7zHcGYSkSJ-BY1dU6hB_7gM`;
       const index = document.getElementsByTagName('script')[0];
       index.parentNode.insertBefore(script, index);
-      // Below is important. 
-      //We cannot access google.maps until it's finished loading
       script.addEventListener('load', event => {
         this.loadAPI()
       })
@@ -35,7 +38,8 @@ class Map extends Component {
   }
 
   render() {
-    console.log(this.props)
+    const { locations } = this.props
+    console.log(this.props, locations)
     return (
       <div className="map" style={{height: "90vh"}} id={this.props.id} />
     );

@@ -6,7 +6,16 @@ class App extends Component {
 
   render() {
 
-    const locations = []
+    /**
+     * Add 5 locations with lat/lng and title values
+     */
+    const locations = [
+      {title: "Tem Tudo", Description: "Utilities Shop", lat: -22.903260, lng: -43.112730},
+      {title: "Casa Moreira e Souza", Description: "Construction Shop", lat: -22.907294, lng: -43.110322},
+      {title: "Fix Shoes and Purses", Description: "Leather work", lat: -22.907929, lng: -43.108769},
+      {title: "Raia Drugstore", Description: "Drugstore", lat: -22.903667, lng: -43.113935},
+      {title: "Recanto do Jambeiro", Description: "Produce Shop", lat: -22.904811, lng: -43.111082}
+    ]
 
     return (
       <div className="App">
@@ -22,6 +31,7 @@ class App extends Component {
               center: { lat: -22.906151, lng: -43.110378 },
               zoom: 15.2
             }}
+            locations={locations}
           />
         </main>
       </div>
