@@ -7,14 +7,14 @@ class App extends Component {
   render() {
 
     /**
-     * Add 5 locations with lat/lng and title values
+     * Add 5 locations with lat/lng, title and description values
      */
     const locations = [
-      {title: "Tem Tudo", Description: "Utilities Shop", lat: -22.903260, lng: -43.112730},
-      {title: "Casa Moreira e Souza", Description: "Construction Shop", lat: -22.907294, lng: -43.110322},
-      {title: "Fix Shoes and Purses", Description: "Leather work", lat: -22.907929, lng: -43.108769},
-      {title: "Raia Drugstore", Description: "Drugstore", lat: -22.903667, lng: -43.113935},
-      {title: "Recanto do Jambeiro", Description: "Produce Shop", lat: -22.904811, lng: -43.111082}
+      {title: "Tem Tudo", description: "Utilities Shop", lat: -22.903260, lng: -43.112730},
+      {title: "Casa Moreira e Souza", description: "Construction Shop", lat: -22.907294, lng: -43.110322},
+      {title: "Fix Shoes and Purses", description: "Leather work", lat: -22.907929, lng: -43.108769},
+      {title: "Raia Drugstore", description: "Drugstore", lat: -22.903667, lng: -43.113935},
+      {title: "Recanto do Jambeiro", description: "Produce Shop", lat: -22.904811, lng: -43.111082}
     ]
 
     return (

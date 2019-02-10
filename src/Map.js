@@ -19,7 +19,23 @@ class Map extends Component {
       map: map,
       title: location.title
       })    
+    this.infoWindows(map, marker, location)
     })
+  }
+
+  /**
+   * Adds a InfoWindow, with data passed to it
+   * @todo style and apply reverse geocoding, to retrieve the lat/lng correspondent's address
+   */
+  infoWindows(map, marker, location) {
+    const infowindow = new window.google.maps.InfoWindow({
+      content:
+      `<div>${location.title}</div>
+      <div>${location.description}</div>
+      <div>Address(reverse geocoding - Learn API)</div>`
+    })
+    marker.addListener('click', () => infowindow.open(map, marker))
+
   }
 
   componentDidMount() {
