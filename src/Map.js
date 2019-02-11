@@ -41,10 +41,15 @@ class Map extends Component {
    */
   listenInfoWindowChange(map, marker, location, infowindow) {
     marker.addListener('click', () => {
-      infowindow.setContent(`content: <div>${location.title}</div><br><div>${location.description}</div><br><div>Address(reverse geocoding - Learn API)</div>`)
+      infowindow.setContent(`<div>${location.title}</div><br><div>Description${location.description}</div><br><div>Address: </div>`)
       infowindow.open(map, marker)
-      // Closes the InfoWindow if clicked anywhere else on the map.
-      map.addListener('click', () => infowindow.close())
+    })      
+  }
+
+  geocoder(location) {
+    const geocoder = new window.google.maps.Geocoder()
+    geocoder.geocode({"location": {"lat": location.lat, "lng": location.lng}}, response => {
+      console.log(response[0].formatted_address)
     })
   }
 
@@ -53,6 +58,8 @@ class Map extends Component {
     if (!window.google) {
       const script = document.createElement('script');
       script.src = `https://maps.google.com/maps/api/js?key=AIzaSyCVQUeNoVu_7zHcGYSkSJ-BY1dU6hB_7gM`;
+      script.async = true
+      script.defer = true
       const index = document.getElementsByTagName('script')[0];
       index.parentNode.insertBefore(script, index);
       script.addEventListener('load', event => {
