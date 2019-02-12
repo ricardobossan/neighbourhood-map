@@ -29,6 +29,15 @@ header {
 .map {
   position: fixed;
 }
+
+.infoWindow {
+  text-align: left;
+}
+
+.infoWindowHeader {
+  font-size: 1.3em;
+}
+
 /* 
 @keyframes App-logo-spin {
   from {

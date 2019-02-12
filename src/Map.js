@@ -12,7 +12,7 @@ class Map extends Component {
       document.getElementById(this.props.id),
       this.props.options);
     // Create only one instance of the InfoWindow, whose values will change as each marker is clicked.
-    const infowindow = new window.google.maps.InfoWindow()    
+    const infowindow = new window.google.maps.InfoWindow()
     this.loadMarkers(map, infowindow)
   }
 
@@ -33,24 +33,25 @@ class Map extends Component {
   }
 
   /**
-   * Changes InfoWindow's content when that marker is clicked.
-   * @todo style and apply reverse geocoding, to retrieve the lat/lng correspondent's address
-   * @todo reverse geocoding request (fetch?) to receive `formatted_address`, 
-   * e.g.: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452
-&location_type=ROOFTOP&result_type=street_address&key=YOUR_API_KEY
+   * Changes InfoWindow's content when that marker is clicked. Uses reverse geocoding
    */
   listenInfoWindowChange(map, marker, location, infowindow) {
-    marker.addListener('click', () => {
-      infowindow.setContent(`<div>${location.title}</div><br><div>Description${location.description}</div><br><div>Address: </div>`)
-      infowindow.open(map, marker)
-    })      
-  }
-
-  geocoder(location) {
+    let formattedAddress = ''
     const geocoder = new window.google.maps.Geocoder()
     geocoder.geocode({"location": {"lat": location.lat, "lng": location.lng}}, response => {
-      console.log(response[0].formatted_address)
+      formattedAddress = response[0].formatted_address
     })
+      marker.addListener('click', () => {
+        infowindow.setContent(
+        `<div class="infoWindow">
+          <div class="infoWindowHeader"><strong>${location.title}</strong></div>
+          <br>
+          <div><strong>Description:</strong> ${location.description}</div>
+          <div><strong>Address:</strong> ${formattedAddress}</div>
+        </div>`
+        )
+        infowindow.open(map, marker)
+      })      
   }
 
   componentDidMount() {
