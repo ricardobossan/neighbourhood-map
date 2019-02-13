@@ -21,7 +21,7 @@ class Map extends Component {
    * Each marker has a click event that, when triggered, will change the InfoWindow's content.
    */
   loadMarkers(map, infowindow) {
-    this.props.locations.map((location) => {
+    this.props.locations.forEach((location) => {
       const marker = new window.google.maps.Marker({
       position: { lat: location.lat, lng: location.lng },
       map: map,
