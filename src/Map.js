@@ -72,7 +72,9 @@ class Map extends Component {
   }
 
   render() {
-    const { locations } = this.props
+/*    // @todo OPTION add a event listener for adding and aside element when the page resized to a mobile viewport
+    window.addEventListener("resize", () => (window.innerWidth | global.innerWidth) <= 700 ? console.log("It worked") : null)
+*/    const { locations } = this.props
     console.log(this.props, locations)
     return (
       <div className="map" style={{height: "90vh"}} id={this.props.id} />

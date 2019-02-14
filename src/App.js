@@ -6,11 +6,15 @@
  * @todo 
  * ## Application Functionality
  *   #### Location Filter
- *     text input that filters as the user types, displaying results on the view (restricting markers?)
+ *     --> text input that filters as the user types, displaying results on the view (restricting markers?)
  *   #### List View
- *    --> _1° Requirement_: USE THE BULMA CSS FRAMEWORK! create a list view, whose state starts with all locations, but, when results are filtered, shows only these results. Mobile First! Maybe use an hamburger menu from [Bulma](https://bulma.io/documentation/components/dropdown/)
- *    --> _1° Requirement_: [should I update classes using state, or make components with conditional rendering?](https://stackoverflow.com/questions/36403101/toggle-class-in-react/36404061)
- *    --> _2° Requirement_: When a location in the List-view is clicked, it triggers it's marker's animation and infowindow
+ *     --> _1° Requirement_: USE THE BULMA CSS FRAMEWORK! create a list view, whose state starts with all locations, but, when results are filtered, shows only these results. Mobile First! Maybe use an hamburger menu from [Bulma](https://bulma.io/documentation/components/dropdown/)
+ *       --> Bulma><nav class="nav-menu is-active"></nav>
+ *       or
+ *       --> <aside> tagEvent listener for resize and conditional ternary for global.innerWidth >= 700
+ *       
+ *     --> _1° Requirement_: [should I update classes using state, or make components with conditional rendering?](https://stackoverflow.com/questions/36403101/toggle-class-in-react/36404061)
+ *     --> _2° Requirement_: When a location in the List-view is clicked, it triggers it's marker's animation and infowindow
  * @todo
  * ## Accessibility
  *   add/modify semantic elements and, subsidiarily, `aria roles`
@@ -18,7 +22,7 @@
  * ## Offline Use
  *   add working service worker, to have offline content when there's no wifi
  * @todo
- * ## New Todo
+ * ## @todo New Todo
  *   #### New Subtask
  *      --> 
  * @todo
