@@ -60,7 +60,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header className="header">
+        <header className="button is-primary">
           <Filter />
         </header>
         <main>
