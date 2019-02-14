@@ -77,7 +77,7 @@ class Map extends Component {
 */    const { locations } = this.props
     console.log(this.props, locations)
     return (
-      <div className="map" style={{height: "90vh"}} id={this.props.id} />
+      <div className="map" style={{height: "95vh"}} id={this.props.id} />
     );
   }
 }

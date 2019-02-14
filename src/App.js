@@ -27,6 +27,7 @@
  *      --> 
  * @todo
  * ## FINISH
+ *   --> If app needs to be faster, try replacing triggerLocationsList by a simple <select> element
  *   --> comment the whole thing
  *   --> complete README
  *     --> Credits due:
@@ -60,10 +61,42 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header>
-          <Filter />
-        </header>
+        <Filter />
         <main>
+          <aside class="menu column is-3 is-hidden-mobile is-hidden-tablet-only">
+            <p class="menu-label">
+              General
+            </p>
+            <ul class="menu-list">
+              <li><a>Dashboard</a></li>
+              <li><a>Customers</a></li>
+            </ul>
+            <p class="menu-label">
+              Administration
+            </p>
+            <ul class="menu-list">
+              <li><a>Team Settings</a></li>
+              <li>
+                <a class="is-active">Manage Your Team</a>
+                <ul>
+                  <li><a>Members</a></li>
+                  <li><a>Plugins</a></li>
+                  <li><a>Add a member</a></li>
+                </ul>
+              </li>
+              <li><a>Invitations</a></li>
+              <li><a>Cloud Storage Environment Settings</a></li>
+              <li><a>Authentication</a></li>
+            </ul>
+            <p class="menu-label">
+              Transactions
+            </p>
+            <ul class="menu-list">
+              <li><a>Payments</a></li>
+              <li><a>Transfers</a></li>
+              <li><a>Balance</a></li>
+            </ul>
+          </aside>
           <Map
             id="map"
             options={{
