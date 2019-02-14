@@ -2,7 +2,7 @@
  * # TODOS - [PROJECT SPECIFICATION](https://review.udacity.com/#!/rubrics/1351/view):
  * @todo 
  * ## Interface Design
- *   --> Make application responsive on anydevice
+ *   --> Make application responsive on any device
  * @todo 
  * ## Application Functionality
  *   #### Location Filter
@@ -39,6 +39,7 @@
  */
 
 import React, { Component } from 'react';
+import Filter from './Filter.js'
 import Map from "./Map.js"
 import './App.css';
 
@@ -60,12 +61,10 @@ class App extends Component {
     return (
       <div className="App">
         <header className="header">
-        {/*
-        <FilterText />
-      */}
+          <Filter />
         </header>
         <main>
-         <Map
+          <Map
             id="map"
             options={{
               center: { lat: -22.906151, lng: -43.110378 },
