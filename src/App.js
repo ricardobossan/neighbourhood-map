@@ -3,6 +3,7 @@
  * @todo 
  * ## Interface Design
  *   --> Make application responsive on any device
+
  * @todo 
  * ## Application Functionality
  *   #### Location Filter
@@ -22,7 +23,7 @@
  * ## Offline Use
  *   add working service worker, to have offline content when there's no wifi
  * @todo
- * ## @todo New Todo
+ * ## @todo MAYBE add cms, like squarespace, to retrieve locations data
  *   #### New Subtask
  *      --> 
  * @todo
@@ -63,7 +64,7 @@ class App extends Component {
       <div className="App">
         <Filter />
         <main>
-          <aside class="menu column is-3 is-hidden-mobile is-hidden-tablet-only">
+          <aside class="menu column is-3-desktop is-hidden-mobile is-hidden-tablet-only">
             <p class="menu-label">
               General
             </p>
