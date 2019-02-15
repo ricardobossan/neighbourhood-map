@@ -64,7 +64,7 @@ class App extends Component {
       <div className="App">
         <Filter />
         <main>
-          <aside class="menu column is-3-desktop is-hidden-mobile is-hidden-tablet-only">
+          <aside class="menu column is-3-desktop is-hidden-touch">
             <p class="menu-label">
               General
             </p>

@@ -16,7 +16,7 @@ class Filter extends Component {
 			<header className="column navbar is-primary">
 				<div>
 					<div className="">
-							<div className={new String(` dropdown ${this.state.dropdownState}`)} style={{"z-index":"1000"}}>
+							<div className={new String(`dropdown is-hidden-desktop ${this.state.dropdownState}`)} style={{"z-index":"1000"}}>
 								<div className="dropdown-trigger is-hidden-desktop">
 								  <button id="triggerLocationsList" className="button" aria-haspopup="true" aria-controls="dropdown-menu">
 								    <span>List</span>
@@ -25,7 +25,7 @@ class Filter extends Component {
 								    </span>
 								  </button>
 								</div>
-						  <div className="dropdown-menu" id="dropdown-menu" role="menu">
+						  <div className="dropdown-menu is-hidden-desktop" id="dropdown-menu" role="menu">
 						    <div className="dropdown-content">
 						      <a href="#" className="dropdown-item">
 						        Dropdown item
@@ -45,10 +45,10 @@ class Filter extends Component {
 						      </a>
 						    </div>
 					  	</div>
+						</div>
 						<div className="">
 							<span> Form for filtering results...</span>
 							<i className="white fas fa-search"></i>
-						</div>
 						</div>
 					</div>
 				</div>
