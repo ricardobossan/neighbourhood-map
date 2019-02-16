@@ -1,16 +1,14 @@
 /**
  * # TODOS - [PROJECT SPECIFICATION](https://review.udacity.com/#!/rubrics/1351/view):
- * @todo 
- * ## Interface Design
- *   --> Make application responsive on any device
 
  * @todo 
  * ## Application Functionality
  *   #### Location Filter
+ *     --> (Branch: `input-datalist`) On touch viewport, use Bulma's property `datalist`, instead of a dropdown and a filter text box. See how it's done and if it works both with dropdown data and how I learned to filter
  *     --> text input that filters as the user types, displaying results on the view (restricting markers?)
  *   #### List View
  *     --> _1° Requirement_: USE THE BULMA CSS FRAMEWORK! create a list view, whose state starts with all locations, but, when results are filtered, shows only these results. Mobile First! Maybe use an hamburger menu from [Bulma](https://bulma.io/documentation/components/dropdown/)
- *       --> Bulma><nav class="nav-menu is-active"></nav>
+ *       --> Bulma><nav className="nav-menu is-active"></nav>
  *       or
  *       --> <aside> tagEvent listener for resize and conditional ternary for global.innerWidth >= 700
  *       
@@ -37,6 +35,11 @@
  *   --> upon project submission, leave `note` for the reviewer: 
     ```
     Understood that could just hardcode information about locations, instead of making API requests to services like Square Space, due to project specification in `Application Architecture`: `There are at least 5 locations in the model. These **may be hard-coded** **_or_** retrieved from a data API.`
+ *
+ * ## DONE
+ * @todo OK
+ * ## Interface Design
+ *   --> Make application responsive on any device
     ```
  */
 
@@ -64,21 +67,21 @@ class App extends Component {
       <div className="App">
         <Filter />
         <main>
-          <aside class="menu column is-3-desktop is-hidden-touch">
-            <p class="menu-label">
+          <aside className="menu column is-3-desktop is-hidden-touch">
+            <p className="menu-label">
               General
             </p>
-            <ul class="menu-list">
+            <ul className="menu-list">
               <li><a>Dashboard</a></li>
               <li><a>Customers</a></li>
             </ul>
-            <p class="menu-label">
+            <p className="menu-label">
               Administration
             </p>
-            <ul class="menu-list">
+            <ul className="menu-list">
               <li><a>Team Settings</a></li>
               <li>
-                <a class="is-active">Manage Your Team</a>
+                <a className="is-active">Manage Your Team</a>
                 <ul>
                   <li><a>Members</a></li>
                   <li><a>Plugins</a></li>
@@ -89,10 +92,10 @@ class App extends Component {
               <li><a>Cloud Storage Environment Settings</a></li>
               <li><a>Authentication</a></li>
             </ul>
-            <p class="menu-label">
+            <p className="menu-label">
               Transactions
             </p>
-            <ul class="menu-list">
+            <ul className="menu-list">
               <li><a>Payments</a></li>
               <li><a>Transfers</a></li>
               <li><a>Balance</a></li>
