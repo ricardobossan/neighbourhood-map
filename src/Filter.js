@@ -21,9 +21,10 @@ class Filter extends Component {
 			<div>
 				<header className="column navbar is-primary">
 					<div className="is-hidden-desktop">
-						<input placeholder="Choose a location" list="locations" id="location-choice" name="location-choice" />
-						<datalist id="locations" style={{"margin":"auto"}}>
+						<input placeholder="Choose a location" list="myLocations" id="location-choice" name="location-choice" />
+						<datalist id="myLocations" style={{"margin":"auto"}}>
 						{
+							/* filteredResult ? filteredResult : startingLocations */
 							locations.map(location => <option key={location.id}>{location.title}</option>)
 						}
 						</datalist>

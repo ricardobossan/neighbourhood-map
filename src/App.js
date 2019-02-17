@@ -5,7 +5,8 @@
  * ## Application Functionality
  *   #### Location Filter
  *     --> text input that filters as the user types, displaying results on the view (restricting markers?)
- *       --> Where there's state for the filter
+ *       --> What is the state for the filter and aside
+ *       --> Where there's state for the filter and aside
  *       --> Use regular expressions as in previous projects
  *     DONE --> (Branch: `input-datalist`) On touch viewport, use Bulma's property `datalist`, instead of a dropdown and a filter text box. See how it's done and if it works both with dropdown data and how I learned to filter
  *   #### List View
@@ -52,61 +53,39 @@ import './App.css';
 
 class App extends Component {
 
-    /**
-     * Add 5 locations with lat/lng, title and description values
-     */
-    locations = () => {
-      const locations = [
-        {title: "Tem Tudo", description: "Utilities Shop", lat: -22.903260, lng: -43.112730, id:"0"},
-        {title: "Casa Moreira e Souza", description: "Construction Shop", lat: -22.907294, lng: -43.110322, id:"1"},
-        {title: "Fix Shoes and Purses", description: "Leather work", lat: -22.907929, lng: -43.108769, id:"2"},
-        {title: "Raia Drugstore", description: "Drugstore", lat: -22.903667, lng: -43.113935, id:"3"},
-        {title: "Recanto do Jambeiro", description: "Produce Shop", lat: -22.904811, lng: -43.111082, id:"4"}
-      ]
-      return locations
-    }
+  state = {
+    filteredLocations: []
+  }
+
+  /**
+   * Add 5 locations with lat/lng, title and description values
+   */
+  startingLocations = [
+      {title: "Tem Tudo", description: "Utilities Shop", lat: -22.903260, lng: -43.112730, id:"0"},
+      {title: "Casa Moreira e Souza", description: "Construction Shop", lat: -22.907294, lng: -43.110322, id:"1"},
+      {title: "Fix Shoes and Purses", description: "Leather work", lat: -22.907929, lng: -43.108769, id:"2"},
+      {title: "Raia Drugstore", description: "Drugstore", lat: -22.903667, lng: -43.113935, id:"3"},
+      {title: "Recanto do Jambeiro", description: "Produce Shop", lat: -22.904811, lng: -43.111082, id:"4"}
+    ]
 
   render() {
 
+    let locations = this.state.filteredLocations.length === 0 ? this.startingLocations : this.state.filteredLocations
+    console.log(this.state.filteredLocations)
+    console.log(this.startingLocations)
+    console.log(locations)
 
     return (
       <div className="App">
         <Filter
-          locations={this.locations()}
+          locations={locations}
         />
         <main>
           <aside className="menu column is-3-desktop is-hidden-touch">
-            <p className="menu-label">
-              General
-            </p>
             <ul className="menu-list">
-              <li><a>Dashboard</a></li>
-              <li><a>Customers</a></li>
-            </ul>
-            <p className="menu-label">
-              Administration
-            </p>
-            <ul className="menu-list">
-              <li><a>Team Settings</a></li>
-              <li>
-                <a className="is-active">Manage Your Team</a>
-                <ul>
-                  <li><a>Members</a></li>
-                  <li><a>Plugins</a></li>
-                  <li><a>Add a member</a></li>
-                </ul>
-              </li>
-              <li><a>Invitations</a></li>
-              <li><a>Cloud Storage Environment Settings</a></li>
-              <li><a>Authentication</a></li>
-            </ul>
-            <p className="menu-label">
-              Transactions
-            </p>
-            <ul className="menu-list">
-              <li><a>Payments</a></li>
-              <li><a>Transfers</a></li>
-              <li><a>Balance</a></li>
+              {
+              locations.map(location => <li key={location.id}><a>{location.title}</a></li>)
+              }
             </ul>
           </aside>
           <Map
@@ -115,7 +94,7 @@ class App extends Component {
               center: { lat: -22.906151, lng: -43.110378 },
               zoom: 15.2
             }}
-            locations={this.locations()}
+            locations={locations}
           />
         </main>
       </div>
