@@ -5,9 +5,9 @@
  * ## Application Functionality
  *   #### Location Filter
  *     --> text input that filters as the user types, displaying results on the view (restricting markers?)
- *       --> What is the state for the filter and aside
- *       --> Where there's state for the filter and aside
  *       --> Use regular expressions as in previous projects
+ *       DONE --> What is the state for the filter and aside
+ *       DONE --> Where there's state for the filter and aside
  *     DONE --> (Branch: `input-datalist`) On touch viewport, use Bulma's property `datalist`, instead of a dropdown and a filter text box. See how it's done and if it works both with dropdown data and how I learned to filter
  *   #### List View
  *     --> _1° Requirement_: USE THE BULMA CSS FRAMEWORK! create a list view, whose state starts with all locations, but, when results are filtered, shows only these results. Mobile First! Maybe use an hamburger menu from [Bulma](https://bulma.io/documentation/components/dropdown/)
@@ -47,6 +47,7 @@
  */
 
 import React, { Component } from 'react';
+import escRegExp from 'escape-string-regexp'
 import Filter from './Filter.js'
 import Map from "./Map.js"
 import './App.css';
@@ -54,6 +55,7 @@ import './App.css';
 class App extends Component {
 
   state = {
+    query: "",
     filteredLocations: []
   }
 
@@ -68,17 +70,29 @@ class App extends Component {
       {title: "Recanto do Jambeiro", description: "Produce Shop", lat: -22.904811, lng: -43.111082, id:"4"}
     ]
 
+  handleFilter = (query) => this.setState({ query: query.trim() })
+
   render() {
 
-    let locations = this.state.filteredLocations.length === 0 ? this.startingLocations : this.state.filteredLocations
-    console.log(this.state.filteredLocations)
-    console.log(this.startingLocations)
-    console.log(locations)
+/*    let locations = this.state.filteredLocations.length === 0 ? this.startingLocations : this.state.filteredLocations
+    const { query } = this.state
+*/
+    const { query } = this.state
+
+    let locations = []
+    if(query.length > 0) {
+      const match = new RegExp(escRegExp(query, 'i'))
+      locations = this.startingLocations.filter((location) => match.test(location.title))
+/*      console.log(locations)
+*/    } else {
+        locations = this.startingLocations
+      }
 
     return (
       <div className="App">
         <Filter
           locations={locations}
+          onFilter={this.handleFilter}
         />
         <main>
           <aside className="menu column is-3-desktop is-hidden-touch">
@@ -88,14 +102,27 @@ class App extends Component {
               }
             </ul>
           </aside>
-          <Map
+          {(locations === this.startingLocations)
+           ? 
+          (<Map
+            id="anotherMap"
+            options={{
+              center: { lat: -22.906151, lng: -43.110378 },
+              zoom: 15.2
+            }}
+            locations={locations}
+          />)
+           : 
+          (<Map
             id="map"
             options={{
               center: { lat: -22.906151, lng: -43.110378 },
               zoom: 15.2
             }}
             locations={locations}
-          />
+          />)
+
+         }
         </main>
       </div>
     );

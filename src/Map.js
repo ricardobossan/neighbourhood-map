@@ -13,15 +13,15 @@ class Map extends Component {
       this.props.options);
     // Create only one instance of the InfoWindow, whose values will change as each marker is clicked.
     const infowindow = new window.google.maps.InfoWindow()
-    this.loadMarkers(map, infowindow)
+    this.loadMarkers(map, infowindow, this.props.locations)
   }
 
   /**
    * Iterate over locations and add markers to them.
    * Each marker has a click event that, when triggered, will change the InfoWindow's content.
    */
-  loadMarkers(map, infowindow) {
-    this.props.locations.forEach((location) => {
+  loadMarkers(map, infowindow, loc) {
+    loc.forEach((location) => {
       const marker = new window.google.maps.Marker({
       position: { lat: location.lat, lng: location.lng },
       map: map,
@@ -74,8 +74,9 @@ class Map extends Component {
   render() {
 /*    // @todo OPTION add a event listener for adding and aside element when the page resized to a mobile viewport
     window.addEventListener("resize", () => (window.innerWidth | global.innerWidth) <= 700 ? console.log("It worked") : null)
-*/    const { locations } = this.props
-    console.log(this.props, locations)
+*/
+    const { locations } = this.props
+    console.log(this.props)
     return (
       <div className="map" style={{height: "95vh"}} id={this.props.id} />
     );

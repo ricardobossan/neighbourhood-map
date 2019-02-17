@@ -14,18 +14,17 @@ class Filter extends Component {
 	render() {
 
 		console.log(this.props)
-		const { locations } = this.props
-		console.log(locations)
+		const { filteredLocations, query, onFilter} = this.props
 
 		return (
 			<div>
 				<header className="column navbar is-primary">
 					<div className="is-hidden-desktop">
-						<input placeholder="Choose a location" list="myLocations" id="location-choice" name="location-choice" />
+						<input defaultValue="" value={query} onChange={(event) => onFilter(event.target.value)} placeholder="Choose a location" list="myLocations" id="location-choice" name="location-choice" />
 						<datalist id="myLocations" style={{"margin":"auto"}}>
 						{
 							/* filteredResult ? filteredResult : startingLocations */
-							locations.map(location => <option key={location.id}>{location.title}</option>)
+							this.props.locations.map(location => <option key={location.id}>{location.title}</option>)
 						}
 						</datalist>
 					</div>
