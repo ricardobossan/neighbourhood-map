@@ -24,7 +24,7 @@ class Filter extends Component {
 						<input placeholder="Choose a location" list="locations" id="location-choice" name="location-choice" />
 						<datalist id="locations" style={{"margin":"auto"}}>
 						{
-							locations.forEach(location => <option>{location.title}</option>)
+							locations.map(location => <option>{location.title}</option>)
 						}
 						</datalist>
 					</div>
