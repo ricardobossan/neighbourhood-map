@@ -65,7 +65,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Filter />
+        <Filter
+          locations={locations}
+        />
         <main>
           <aside className="menu column is-3-desktop is-hidden-touch">
             <p className="menu-label">
