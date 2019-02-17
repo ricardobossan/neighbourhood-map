@@ -4,8 +4,10 @@
  * @todo 
  * ## Application Functionality
  *   #### Location Filter
- *     --> (Branch: `input-datalist`) On touch viewport, use Bulma's property `datalist`, instead of a dropdown and a filter text box. See how it's done and if it works both with dropdown data and how I learned to filter
  *     --> text input that filters as the user types, displaying results on the view (restricting markers?)
+ *       --> Where there's state for the filter
+ *       --> Use regular expressions as in previous projects
+ *     DONE --> (Branch: `input-datalist`) On touch viewport, use Bulma's property `datalist`, instead of a dropdown and a filter text box. See how it's done and if it works both with dropdown data and how I learned to filter
  *   #### List View
  *     --> _1° Requirement_: USE THE BULMA CSS FRAMEWORK! create a list view, whose state starts with all locations, but, when results are filtered, shows only these results. Mobile First! Maybe use an hamburger menu from [Bulma](https://bulma.io/documentation/components/dropdown/)
  *       --> Bulma><nav className="nav-menu is-active"></nav>
@@ -50,23 +52,27 @@ import './App.css';
 
 class App extends Component {
 
-  render() {
-
     /**
      * Add 5 locations with lat/lng, title and description values
      */
-    const locations = [
-      {title: "Tem Tudo", description: "Utilities Shop", lat: -22.903260, lng: -43.112730},
-      {title: "Casa Moreira e Souza", description: "Construction Shop", lat: -22.907294, lng: -43.110322},
-      {title: "Fix Shoes and Purses", description: "Leather work", lat: -22.907929, lng: -43.108769},
-      {title: "Raia Drugstore", description: "Drugstore", lat: -22.903667, lng: -43.113935},
-      {title: "Recanto do Jambeiro", description: "Produce Shop", lat: -22.904811, lng: -43.111082}
-    ]
+    locations = () => {
+      const locations = [
+        {title: "Tem Tudo", description: "Utilities Shop", lat: -22.903260, lng: -43.112730, id:"0"},
+        {title: "Casa Moreira e Souza", description: "Construction Shop", lat: -22.907294, lng: -43.110322, id:"1"},
+        {title: "Fix Shoes and Purses", description: "Leather work", lat: -22.907929, lng: -43.108769, id:"2"},
+        {title: "Raia Drugstore", description: "Drugstore", lat: -22.903667, lng: -43.113935, id:"3"},
+        {title: "Recanto do Jambeiro", description: "Produce Shop", lat: -22.904811, lng: -43.111082, id:"4"}
+      ]
+      return locations
+    }
+
+  render() {
+
 
     return (
       <div className="App">
         <Filter
-          locations={locations}
+          locations={this.locations()}
         />
         <main>
           <aside className="menu column is-3-desktop is-hidden-touch">
@@ -109,7 +115,7 @@ class App extends Component {
               center: { lat: -22.906151, lng: -43.110378 },
               zoom: 15.2
             }}
-            locations={locations}
+            locations={this.locations()}
           />
         </main>
       </div>
