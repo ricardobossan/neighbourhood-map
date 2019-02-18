@@ -17,9 +17,9 @@ class Filter extends Component {
 		const { query, onFilter } = this.props
 
 		return (
-			<div>
-				<header className="column navbar is-primary">
-					<div className="is-hidden-desktop">
+			<div tabindex="-1">
+				<header className="column navbar is-primary" tabindex="-1">
+					<div className="is-hidden-desktop" tabindex="-1">
 						<input defaultValue="" value={query} onChange={(event) => onFilter(event.target.value)} placeholder="Input is case sensitive" list="myLocations" id="location-choice" name="location-choice" />
 						<datalist id="myLocations" style={{"margin":"auto"}}>
 						{

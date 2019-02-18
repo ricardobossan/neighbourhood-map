@@ -25,7 +25,7 @@ class Map extends Component {
     locations.forEach((loc) => {
       var image = {
   url: "https://prnautica.com/wp-content/uploads/2015/12/map-marker-icon.png",
-  size: new window.google.maps.Size(71, 71),
+  size: new window.google.maps.Size(25, 25),
   origin: new window.google.maps.Point(0, 0),
   anchor: new window.google.maps.Point(17, 34),
   scaledSize: new window.google.maps.Size(25, 25)

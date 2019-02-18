@@ -120,12 +120,13 @@ class App extends Component {
         <Filter
           locations={locations}
           onFilter={this.handleFilter}
+          tabindex="-1"
         />
         <main>
           <aside className="menu column is-3-desktop is-hidden-touch">
             <ul className="menu-list">
               {
-              locations.map(location => <li key={location.venue.name + location.referralId}><a>{location.venue.name}</a></li>)
+              locations.map(location => <li key={location.venue.name + location.referralId}><a  tabindex="0">{location.venue.name}</a></li>)
               }
             </ul>
           </aside>
