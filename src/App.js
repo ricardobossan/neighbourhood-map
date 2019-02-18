@@ -102,27 +102,14 @@ class App extends Component {
               }
             </ul>
           </aside>
-          {(locations === this.startingLocations)
-           ? 
-          (<Map
-            id="anotherMap"
-            options={{
-              center: { lat: -22.906151, lng: -43.110378 },
-              zoom: 15.2
-            }}
-            locations={locations}
-          />)
-           : 
-          (<Map
+          <Map
             id="map"
             options={{
               center: { lat: -22.906151, lng: -43.110378 },
               zoom: 15.2
             }}
             locations={locations}
-          />)
-
-         }
+          />         
         </main>
       </div>
     );
