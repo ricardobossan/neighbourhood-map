@@ -1,23 +1,9 @@
 /**
  * # TODOS - [PROJECT SPECIFICATION](https://review.udacity.com/#!/rubrics/1351/view):
 
- * @todo 
- *   #### List View
- *     DONE --> _1° Requirement_: USE THE BULMA CSS FRAMEWORK! create a list view, whose state starts with all locations, but, when results are filtered, shows only these results. Mobile First! Maybe use an hamburger menu from [Bulma](https://bulma.io/documentation/components/dropdown/)
- *       DONE --> <aside> tagEvent listener for resize and conditional ternary for global.innerWidth >= 700
- *       
- *     DONE --> _1° Requirement_: [should I update classes using state, or make components with conditional rendering?](https://stackoverflow.com/questions/36403101/toggle-class-in-react/36404061)
- *     --> _2° Requirement_: When a location in the List-view is clicked, it triggers it's marker's animation and infowindow
- * @todo
- * ## Accessibility
- *   --> add/modify semantic elements and, subsidiarily, `aria roles`
  * @todo
  * ## Offline Use
  *   --> add working service worker, to have offline content when there's no wifi
- * @todo
- * ## @todo MAYBE add cms, like squarespace, to retrieve locations data
- *   #### New Subtask
- *      --> 
  * @todo
  * ## FINISH
  *   --> refine style
@@ -25,6 +11,7 @@
  *   --> complete README
  *     --> Credits due:
  *       - [Traversy Media' Youtube Channel for Crash Course on Bulma CSS Framework](https://www.youtube.com/watch?v=IiPQYQT2-wg)
+ *       - [Prnautica.com, for marker icon](https://prnautica.com/wp-content/uploads/2015/12/map-marker-icon.png)
  *   --> review rubric
  *   --> send project for review
  *
@@ -39,6 +26,18 @@
  *       DONE --> What is the state for the filter and aside
  *       DONE --> Where there's state for the filter and aside
  *     DONE --> (Branch: `input-datalist`) On touch viewport, use Bulma's property `datalist`, instead of a dropdown and a filter text box. See how it's done and if it works both with dropdown data and how I learned to filter
+ * @todo 
+ *   #### List View
+ *     DONE --> _1° Requirement_: USE THE BULMA CSS FRAMEWORK! create a list view, whose state starts with all locations, but, when results are filtered, shows only these results. Mobile First! Maybe use an hamburger menu from [Bulma](https://bulma.io/documentation/components/dropdown/)
+ *       DONE --> <aside> tagEvent listener for resize and conditional ternary for global.innerWidth >= 700
+ *     DONE --> _1° Requirement_: [should I update classes using state, or make components with conditional rendering?](https://stackoverflow.com/questions/36403101/toggle-class-in-react/36404061)
+ *     DONE --> _2° Requirement_: When a location in the List-view is clicked, it triggers it's marker's animation and infowindow
+ * @todo
+ * ## Accessibility
+ *   DONE --> add/modify semantic elements and, subsidiarily, `aria roles`
+ * @todo
+ * ## @todo MAYBE add cms, like squarespace, to retrieve locations data
+ *   DONE --> implement API for locations details
     ```
  */
 
@@ -88,23 +87,14 @@ class App extends Component {
 
   axios.get(endPoint + new URLSearchParams(parameters))
     .then(res => {
-      console.log(res)
       this.setState({startingPlaces: res.data.response.groups[0].items}) 
     })
     .catch(err => console.log(err.response))
-
-/*  this.setState({startingPlaces: foursquareAPI.getAPI()})
-*/  }
+  }
 
   render() {
 
-/*    let locations = this.state.filteredLocations.length === 0 ? this.startingPlaces : this.state.filteredLocations
     const { query } = this.state
-*/
-    const { query, startingPlaces } = this.state
-    console.log(this.state)
-/*    this.state.startingPlaces.length > 0 ? console.log(this.state.startingPlaces) : console.log("logs nothing")
-*/    
 
     let locations = []
     if(query.length > 0) {
@@ -113,7 +103,6 @@ class App extends Component {
     } else {
         locations = this.state.startingPlaces
       }
-      console.log(locations)
 
     return (
       <div className="App">
@@ -122,10 +111,10 @@ class App extends Component {
           onFilter={this.handleFilter}
         />
         <main>
-          <aside className="menu column is-3-desktop is-hidden-touch">
+          <aside className="menu column is-3-desktop is-hidden-touch" aria-label="locations returned from the search">
             <ul className="menu-list">
               {
-              locations.map(location => <li key={location.venue.name + location.referralId}><a  tabindex="0">{location.venue.name}</a></li>)
+              locations.map(location => <li key={location.venue.name + location.referralId}><a  tabIndex="0">{location.venue.name}</a></li>)
               }
             </ul>
           </aside>

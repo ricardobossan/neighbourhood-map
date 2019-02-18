@@ -21,7 +21,6 @@ class Map extends Component {
    * Each marker has a click event that, when triggered, will change the InfoWindow's content.
    */
   loadMarkers(mapName, infowindow, locations) {
-    console.log(locations)
     locations.forEach((loc) => {
       var image = {
   url: "https://prnautica.com/wp-content/uploads/2015/12/map-marker-icon.png",
@@ -48,7 +47,6 @@ class Map extends Component {
    * Changes InfoWindow's content when that marker is clicked. Uses reverse geocoding
    */
   listenInfoWindowChange(mapName, marker, loc, infowindow) {
-    const geocoder = new window.google.maps.Geocoder()
       marker.addListener('click', () => {
         infowindow.setContent(
         `<div class="infoWindow">
@@ -83,19 +81,16 @@ class Map extends Component {
     /**
      * Modal for when no result is returned from search
      */
-    if(this.props.locations.length != 5) {
+    if(this.props.locations.length !== 5) {
       this.loadAPI("anotherMapName")
       if(this.props.locations.length === 0) window.alert("The location you're looking for was not found.")
     }
 
-
-    const { locations } = this.props
-    console.log(this.props)
     return (
       /**
        * Renders map
        */
-      <section className="map" style={{height: "95vh"}} id={this.props.id} aria-role="application" aria-label="map"/>
+      <section className="map" style={{height: "95vh"}} id={this.props.id} aria-label="map"/>
     );
   }
 }

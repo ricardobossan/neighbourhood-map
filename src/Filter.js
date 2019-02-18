@@ -13,22 +13,21 @@ class Filter extends Component {
 */
 	render() {
 
-		console.log(this.props)
 		const { query, onFilter } = this.props
 
 		return (
-			<div tabindex="-1">
-				<header className="column navbar is-primary" tabindex="-1">
-					<div className="is-hidden-desktop" aria-live="assertive" aria-atomic="true">
-						<input defaultValue="" value={query} onChange={(event) => onFilter(event.target.value)} placeholder="Input is case sensitive" list="myLocations" id="location-choice" name="location-choice" aria-role="search" aria-label="Search locations (Case Sensitive" />
-						<datalist id="myLocations" style={{"margin":"auto"}} aria-role="listbox" >
+			<div tabIndex="-1">
+				<header className="column navbar is-primary">
+					<div className="is-hidden-desktop" aria-live="assertive" aria-atomic="true" >
+						<input defaultValue="" value={query} onChange={(event) => onFilter(event.target.value)} placeholder="Input is case sensitive" list="myLocations" id="location-choice" name="location-choice" aria-label="Search locations (Case Sensitive" />
+						<datalist id="myLocations" style={{"margin":"auto"}}>
 						{
 							/* filteredResult ? filteredResult : startingLocations */
 							this.props.locations.map(location => <option key={location.referralId + location.venue.name}>{location.venue.name}</option>)
 						}
 						</datalist>
 					</div>
-					<input className="is-hidden-touch" defaultValue="" value={query} onChange={(event) => onFilter(event.target.value)} placeholder="Input is case sensitive" type="text" name="location-choice" aria-role="search" aria-label="Search Locations (Case Sensitive" />
+					<input className="is-hidden-touch" defaultValue="" value={query} onChange={(event) => onFilter(event.target.value)} placeholder="Input is case sensitive" type="text" name="location-choice" aria-label="Search Locations (Case Sensitive" />
 
 				</header>
 			</div>
