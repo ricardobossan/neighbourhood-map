@@ -37,18 +37,14 @@ class Map extends Component {
    * Changes InfoWindow's content when that marker is clicked. Uses reverse geocoding
    */
   listenInfoWindowChange(mapName, marker, loc, infowindow) {
-    let formattedAddress = ''
     const geocoder = new window.google.maps.Geocoder()
-    geocoder.geocode({"location": {"lat": loc.venue.location.lat, "lng": loc.venue.location.lng}}, response => {
-      formattedAddress = response
-    })
       marker.addListener('click', () => {
         infowindow.setContent(
         `<div class="infoWindow">
           <div class="infoWindowHeader"><strong>${loc.venue.name}</strong></div>
           <br>
           <div><strong>Description:</strong> ${loc.venue.categories[0].shortName}</div>
-          <div><strong>Address:</strong> ${formattedAddress}</div>
+          <div><strong>Address:</strong> ${loc.venue.location.formattedAddress[0]}, ${loc.venue.location.formattedAddress[1]}</div>
         </div>`
         )
         infowindow.open(mapName, marker)
