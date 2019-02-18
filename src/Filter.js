@@ -19,16 +19,16 @@ class Filter extends Component {
 		return (
 			<div tabindex="-1">
 				<header className="column navbar is-primary" tabindex="-1">
-					<div className="is-hidden-desktop" tabindex="-1">
-						<input defaultValue="" value={query} onChange={(event) => onFilter(event.target.value)} placeholder="Input is case sensitive" list="myLocations" id="location-choice" name="location-choice" />
-						<datalist id="myLocations" style={{"margin":"auto"}}>
+					<div className="is-hidden-desktop" aria-live="assertive" aria-atomic="true">
+						<input defaultValue="" value={query} onChange={(event) => onFilter(event.target.value)} placeholder="Input is case sensitive" list="myLocations" id="location-choice" name="location-choice" aria-role="search" aria-label="Search locations (Case Sensitive" />
+						<datalist id="myLocations" style={{"margin":"auto"}} aria-role="listbox" >
 						{
 							/* filteredResult ? filteredResult : startingLocations */
 							this.props.locations.map(location => <option key={location.referralId + location.venue.name}>{location.venue.name}</option>)
 						}
 						</datalist>
 					</div>
-					<input className="is-hidden-touch" defaultValue="" value={query} onChange={(event) => onFilter(event.target.value)} placeholder="Input is case sensitive" type="text" name="location-choice" />
+					<input className="is-hidden-touch" defaultValue="" value={query} onChange={(event) => onFilter(event.target.value)} placeholder="Input is case sensitive" type="text" name="location-choice" aria-role="search" aria-label="Search Locations (Case Sensitive" />
 
 				</header>
 			</div>

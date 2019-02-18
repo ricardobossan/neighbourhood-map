@@ -59,7 +59,7 @@ class Map extends Component {
         </div>`
         )
         infowindow.open(mapName, marker)
-      })      
+      })
   }
 
   componentDidMount() {
@@ -80,18 +80,22 @@ class Map extends Component {
   }
 
   render() {
-/*    // @todo OPTION add a event listener for adding and aside element when the page resized to a mobile viewport
-    window.addEventListener("resize", () => (window.innerWidth | global.innerWidth) <= 700 ? console.log("It worked") : null)
-*/
+    /**
+     * Modal for when no result is returned from search
+     */
     if(this.props.locations.length != 5) {
       this.loadAPI("anotherMapName")
       if(this.props.locations.length === 0) window.alert("The location you're looking for was not found.")
     }
 
+
     const { locations } = this.props
     console.log(this.props)
     return (
-      <div className="map" style={{height: "95vh"}} id={this.props.id} />
+      /**
+       * Renders map
+       */
+      <section className="map" style={{height: "95vh"}} id={this.props.id} aria-role="application" aria-label="map"/>
     );
   }
 }

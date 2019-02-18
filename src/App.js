@@ -120,7 +120,6 @@ class App extends Component {
         <Filter
           locations={locations}
           onFilter={this.handleFilter}
-          tabindex="-1"
         />
         <main>
           <aside className="menu column is-3-desktop is-hidden-touch">
