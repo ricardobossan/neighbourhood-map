@@ -23,8 +23,16 @@ class Map extends Component {
   loadMarkers(mapName, infowindow, locations) {
     console.log(locations)
     locations.forEach((loc) => {
+      var image = {
+        url: "https://prnautica.com/wp-content/uploads/2015/12/map-marker-icon.png",
+        size: new window.google.maps.Size(71, 71),
+        origin: new window.google.maps.Point(0, 0),
+        anchor: new window.google.maps.Point(17, 34),
+        scaledSize: new window.google.maps.Size(25, 25)
+      };
       const marker = new window.google.maps.Marker({
       position: { lat: loc.venue.location.lat, lng: loc.venue.location.lng },
+      icon: image,
       map: mapName,
       title: loc.venue.name
       })

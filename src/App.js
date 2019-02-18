@@ -2,47 +2,43 @@
  * # TODOS - [PROJECT SPECIFICATION](https://review.udacity.com/#!/rubrics/1351/view):
 
  * @todo 
- * ## Application Functionality
- *   #### Location Filter
- *     --> text input that filters as the user types, displaying results on the view (restricting markers?)
- *       --> Use regular expressions as in previous projects
- *       DONE --> What is the state for the filter and aside
- *       DONE --> Where there's state for the filter and aside
- *     DONE --> (Branch: `input-datalist`) On touch viewport, use Bulma's property `datalist`, instead of a dropdown and a filter text box. See how it's done and if it works both with dropdown data and how I learned to filter
  *   #### List View
- *     --> _1° Requirement_: USE THE BULMA CSS FRAMEWORK! create a list view, whose state starts with all locations, but, when results are filtered, shows only these results. Mobile First! Maybe use an hamburger menu from [Bulma](https://bulma.io/documentation/components/dropdown/)
- *       --> Bulma><nav className="nav-menu is-active"></nav>
- *       or
- *       --> <aside> tagEvent listener for resize and conditional ternary for global.innerWidth >= 700
+ *     DONE --> _1° Requirement_: USE THE BULMA CSS FRAMEWORK! create a list view, whose state starts with all locations, but, when results are filtered, shows only these results. Mobile First! Maybe use an hamburger menu from [Bulma](https://bulma.io/documentation/components/dropdown/)
+ *       DONE --> <aside> tagEvent listener for resize and conditional ternary for global.innerWidth >= 700
  *       
- *     --> _1° Requirement_: [should I update classes using state, or make components with conditional rendering?](https://stackoverflow.com/questions/36403101/toggle-class-in-react/36404061)
+ *     DONE --> _1° Requirement_: [should I update classes using state, or make components with conditional rendering?](https://stackoverflow.com/questions/36403101/toggle-class-in-react/36404061)
  *     --> _2° Requirement_: When a location in the List-view is clicked, it triggers it's marker's animation and infowindow
  * @todo
  * ## Accessibility
- *   add/modify semantic elements and, subsidiarily, `aria roles`
+ *   --> add/modify semantic elements and, subsidiarily, `aria roles`
  * @todo
  * ## Offline Use
- *   add working service worker, to have offline content when there's no wifi
+ *   --> add working service worker, to have offline content when there's no wifi
  * @todo
  * ## @todo MAYBE add cms, like squarespace, to retrieve locations data
  *   #### New Subtask
  *      --> 
  * @todo
  * ## FINISH
- *   --> If app needs to be faster, try replacing triggerLocationsList by a simple <select> element
+ *   --> refine style
  *   --> comment the whole thing
  *   --> complete README
  *     --> Credits due:
  *       - [Traversy Media' Youtube Channel for Crash Course on Bulma CSS Framework](https://www.youtube.com/watch?v=IiPQYQT2-wg)
  *   --> review rubric
- *   --> upon project submission, leave `note` for the reviewer: 
-    ```
-    Understood that could just hardcode information about locations, instead of making API requests to services like Square Space, due to project specification in `Application Architecture`: `There are at least 5 locations in the model. These **may be hard-coded** **_or_** retrieved from a data API.`
+ *   --> send project for review
  *
  * ## DONE
  * @todo OK
  * ## Interface Design
- *   --> Make application responsive on any device
+ *   DONE --> Make application responsive on any device
+ * ## Application Functionality
+ *   #### Location Filter
+ *     DONE --> text input that filters as the user types, displaying results on the view (restricting markers?)
+ *       DONE --> Use regular expressions as in previous projects
+ *       DONE --> What is the state for the filter and aside
+ *       DONE --> Where there's state for the filter and aside
+ *     DONE --> (Branch: `input-datalist`) On touch viewport, use Bulma's property `datalist`, instead of a dropdown and a filter text box. See how it's done and if it works both with dropdown data and how I learned to filter
     ```
  */
 
