@@ -14,24 +14,22 @@ class Filter extends Component {
 	render() {
 
 		console.log(this.props)
-		const { filteredLocations, query, onFilter} = this.props
+		const { query, onFilter } = this.props
 
 		return (
 			<div>
 				<header className="column navbar is-primary">
 					<div className="is-hidden-desktop">
-						<input defaultValue="" value={query} onChange={(event) => onFilter(event.target.value)} placeholder="Choose a location" list="myLocations" id="location-choice" name="location-choice" />
+						<input defaultValue="" value={query} onChange={(event) => onFilter(event.target.value)} placeholder="Input is case sensitive" list="myLocations" id="location-choice" name="location-choice" />
 						<datalist id="myLocations" style={{"margin":"auto"}}>
 						{
 							/* filteredResult ? filteredResult : startingLocations */
-							this.props.locations.map(location => <option key={location.referralId + location.venue.name}>{location.title}</option>)
+							this.props.locations.map(location => <option key={location.referralId + location.venue.name}>{location.venue.name}</option>)
 						}
 						</datalist>
 					</div>
-					<div className="is-hidden-touch">
-						<span> Form for filtering results...</span>
-						<i className="white fas fa-search"></i>
-					</div>
+					<input className="is-hidden-touch" defaultValue="" value={query} onChange={(event) => onFilter(event.target.value)} placeholder="Input is case sensitive" type="text" name="location-choice" />
+
 				</header>
 			</div>
 		)

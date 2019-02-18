@@ -113,7 +113,7 @@ class App extends Component {
     let locations = []
     if(query.length > 0) {
       const match = new RegExp(escRegExp(query, 'i'))
-      locations = this.state.startingPlaces.filter((location) => match.test(location.title))
+      locations = this.state.startingPlaces.filter((location) => match.test(location.venue.name))
     } else {
         locations = this.state.startingPlaces
       }
@@ -129,7 +129,7 @@ class App extends Component {
           <aside className="menu column is-3-desktop is-hidden-touch">
             <ul className="menu-list">
               {
-              locations.map(location => <li key={location.venue.name + location.referralId}><a>{location.title}</a></li>)
+              locations.map(location => <li key={location.venue.name + location.referralId}><a>{location.venue.name}</a></li>)
               }
             </ul>
           </aside>
