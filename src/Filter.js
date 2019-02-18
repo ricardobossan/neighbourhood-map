@@ -24,7 +24,7 @@ class Filter extends Component {
 						<datalist id="myLocations" style={{"margin":"auto"}}>
 						{
 							/* filteredResult ? filteredResult : startingLocations */
-							this.props.locations.map(location => <option key={location.id}>{location.title}</option>)
+							this.props.locations.map(location => <option key={location.referralId + location.venue.name}>{location.title}</option>)
 						}
 						</datalist>
 					</div>

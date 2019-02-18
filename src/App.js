@@ -46,8 +46,8 @@
     ```
  */
 
-import React, { Component } from 'react';
-import * as FoursquareAPI from './foursquare-api'
+import React, { Component } from 'react'
+import axios from 'axios'
 import escRegExp from 'escape-string-regexp'
 import Filter from './Filter.js'
 import Map from "./Map.js"
@@ -57,38 +57,67 @@ class App extends Component {
 
   state = {
     query: "",
-    filteredLocations: []
+    startingPlaces: [
+      {venue: {location: {lat: -22.903260, lng: -43.112730}, categories: [{shortName: "Store"}], name: "Tem Tudo", description: "Utilities Shop", referralId:10}},
+      {venue: {location: {lat: -22.907294, lng: -43.110322}, categories: [{shortName: "Hardware Store"}], name: "Casa Moreira e Souza", description: "Construction Shop", referralId:12}},
+      {venue: {location: {lat: -22.907929, lng: -43.108769}, categories: [{shortName: "Leather Repair"}], name: "Fix Shoes and Purses", description: "Leather work", referralId:23}},
+      {venue: {location: {lat: -22.903667, lng: -43.113935}, categories: [{shortName: "Drugstore"}], name: "Raia Drugstore", description: "Drugstore", referralId:34}},
+      {venue: {location: {lat: -22.904811, lng: -43.111082}, categories: [{shortName: "Produce Shop"}], name: "Recanto do Jambeiro", description: "Produce Shop", referralId:45}}
+    ]
   }
 
-  /**
+  /*
    * Add 5 locations with lat/lng, title and description values
    */
-  startingLocations = [
-      {title: "Tem Tudo", description: "Utilities Shop", lat: -22.903260, lng: -43.112730, id:"0"},
-      {title: "Casa Moreira e Souza", description: "Construction Shop", lat: -22.907294, lng: -43.110322, id:"1"},
-      {title: "Fix Shoes and Purses", description: "Leather work", lat: -22.907929, lng: -43.108769, id:"2"},
-      {title: "Raia Drugstore", description: "Drugstore", lat: -22.903667, lng: -43.113935, id:"3"},
-      {title: "Recanto do Jambeiro", description: "Produce Shop", lat: -22.904811, lng: -43.111082, id:"4"}
+/*  startingLocations = [
+      {venue: {location: {lat: -22.903260, lng: -43.112730}, name: "Tem Tudo", description: "Utilities Shop", id:"0"}},
+      {venue: {location: {lat: -22.907294, lng: -43.110322}, name: "Casa Moreira e Souza", description: "Construction Shop", id:"1"}},
+      {venue: {location: {lat: -22.907929, lng: -43.108769}, name: "Fix Shoes and Purses", description: "Leather work", id:"2"}},
+      {venue: {location: {lat: -22.903667, lng: -43.113935}, name: "Raia Drugstore", description: "Drugstore", id:"3"}},
+      {venue: {location: {lat: -22.904811, lng: -43.111082}, name: "Recanto do Jambeiro", description: "Produce Shop", id:"4"}}
     ]
-
+*/
   handleFilter = (query) => this.setState({ query: query.trim() })
+
+  componentDidMount() {
+  const endPoint = "https://api.foursquare.com/v2/venues/explore?"
+  const parameters = {
+    client_id: "NRQZ3OTXP3KJH05HXL3RKRKRTF3WJW4MCNMHZFPIY3HKVWHH",
+    client_secret: "GTDZ10LLV2HYUJBTSRWV1ULDBWKXBJDZ5EQ4HAEZTCVG4AL4",
+    query: "food",
+    ll: "-22.906151,-43.110378",
+    v: "20190223",
+    radius:1000
+  }
+
+  axios.get(endPoint + new URLSearchParams(parameters))
+    .then(res => {
+      console.log(res)
+      this.setState({startingPlaces: res.data.response.groups[0].items}) 
+    })
+    .catch(err => console.log(err.response))
+
+/*  this.setState({startingPlaces: foursquareAPI.getAPI()})
+*/  }
 
   render() {
 
-/*    let locations = this.state.filteredLocations.length === 0 ? this.startingLocations : this.state.filteredLocations
+/*    let locations = this.state.filteredLocations.length === 0 ? this.startingPlaces : this.state.filteredLocations
     const { query } = this.state
 */
-    FoursquareAPI.getAPI()
-    const { query } = this.state
+    const { query, startingPlaces } = this.state
+    console.log(this.state)
+/*    this.state.startingPlaces.length > 0 ? console.log(this.state.startingPlaces) : console.log("logs nothing")
+*/    
 
     let locations = []
     if(query.length > 0) {
       const match = new RegExp(escRegExp(query, 'i'))
-      locations = this.startingLocations.filter((location) => match.test(location.title))
-/*      console.log(locations)
-*/    } else {
-        locations = this.startingLocations
+      locations = this.state.startingPlaces.filter((location) => match.test(location.title))
+    } else {
+        locations = this.state.startingPlaces
       }
+      console.log(locations)
 
     return (
       <div className="App">
@@ -100,7 +129,7 @@ class App extends Component {
           <aside className="menu column is-3-desktop is-hidden-touch">
             <ul className="menu-list">
               {
-              locations.map(location => <li key={location.id}><a>{location.title}</a></li>)
+              locations.map(location => <li key={location.venue.name + location.referralId}><a>{location.title}</a></li>)
               }
             </ul>
           </aside>
@@ -108,7 +137,7 @@ class App extends Component {
             id="map"
             options={{
               center: { lat: -22.906151, lng: -43.110378 },
-              zoom: 15.2
+              zoom: 15
             }}
             locations={locations}
           />         

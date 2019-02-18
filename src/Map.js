@@ -20,34 +20,34 @@ class Map extends Component {
    * Iterate over locations and add markers to them.
    * Each marker has a click event that, when triggered, will change the InfoWindow's content.
    */
-  loadMarkers(mapName, infowindow, loc) {
-    loc.forEach((location) => {
+  loadMarkers(mapName, infowindow, locations) {
+    console.log(locations)
+    locations.forEach((loc) => {
       const marker = new window.google.maps.Marker({
-      position: { lat: location.lat, lng: location.lng },
+      position: { lat: loc.venue.location.lat, lng: loc.venue.location.lng },
       map: mapName,
-      title: location.title
+      title: loc.venue.name
       })
       // Method call adds Listener for changing InfoWindow's content upon click
-      this.listenInfoWindowChange(mapName, marker, location, infowindow)
+      this.listenInfoWindowChange(mapName, marker, loc, infowindow)
     })
   }
 
   /**
    * Changes InfoWindow's content when that marker is clicked. Uses reverse geocoding
    */
-  listenInfoWindowChange(mapName, marker, location, infowindow) {
+  listenInfoWindowChange(mapName, marker, loc, infowindow) {
     let formattedAddress = ''
     const geocoder = new window.google.maps.Geocoder()
-    geocoder.geocode({"location": {"lat": location.lat, "lng": location.lng}}, response => {
+    geocoder.geocode({"location": {"lat": loc.venue.location.lat, "lng": loc.venue.location.lng}}, response => {
       formattedAddress = response
-      console.log(response)
     })
       marker.addListener('click', () => {
         infowindow.setContent(
         `<div class="infoWindow">
-          <div class="infoWindowHeader"><strong>${location.title}</strong></div>
+          <div class="infoWindowHeader"><strong>${loc.venue.name}</strong></div>
           <br>
-          <div><strong>Description:</strong> ${location.description}</div>
+          <div><strong>Description:</strong> ${loc.venue.categories[0].shortName}</div>
           <div><strong>Address:</strong> ${formattedAddress}</div>
         </div>`
         )
