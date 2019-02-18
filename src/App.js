@@ -47,6 +47,7 @@
  */
 
 import React, { Component } from 'react';
+import * as FoursquareAPI from './foursquare-api'
 import escRegExp from 'escape-string-regexp'
 import Filter from './Filter.js'
 import Map from "./Map.js"
@@ -77,6 +78,7 @@ class App extends Component {
 /*    let locations = this.state.filteredLocations.length === 0 ? this.startingLocations : this.state.filteredLocations
     const { query } = this.state
 */
+    FoursquareAPI.getAPI()
     const { query } = this.state
 
     let locations = []
