@@ -36,7 +36,8 @@ class Map extends Component {
       map: mapName,
       title: loc.venue.name
       })
-      setTimeout(() => marker.setAnimation(window.google.maps.Animation.BOUNCE), 500)
+      console.log(marker)
+      setTimeout(() => marker.setAnimation(window.google.maps.Animation.BOUNCE), 400)
       setTimeout(() => marker.setAnimation(null), 700)
       // Method call adds Listener for changing InfoWindow's content upon click
       this.listenInfoWindowChange(mapName, marker, loc, infowindow)

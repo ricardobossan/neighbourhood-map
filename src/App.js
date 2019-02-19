@@ -1,46 +1,3 @@
-/**
- * # TODOS - [PROJECT SPECIFICATION](https://review.udacity.com/#!/rubrics/1351/view):
-
- * @todo
- * ## Offline Use
- *   --> add working service worker, to have offline content when there's no wifi
- * @todo
- * ## FINISH
- *   --> refine style
- *   --> comment the whole thing
- *   --> complete README
- *     --> Credits due:
- *       - [Traversy Media' Youtube Channel for Crash Course on Bulma CSS Framework](https://www.youtube.com/watch?v=IiPQYQT2-wg)
- *       - [Prnautica.com, for marker icon](https://prnautica.com/wp-content/uploads/2015/12/map-marker-icon.png)
- *   --> review rubric
- *   --> send project for review
- *
- * ## DONE
- * @todo OK
- * ## Interface Design
- *   DONE --> Make application responsive on any device
- * ## Application Functionality
- *   #### Location Filter
- *     DONE --> text input that filters as the user types, displaying results on the view (restricting markers?)
- *       DONE --> Use regular expressions as in previous projects
- *       DONE --> What is the state for the filter and aside
- *       DONE --> Where there's state for the filter and aside
- *     DONE --> (Branch: `input-datalist`) On touch viewport, use Bulma's property `datalist`, instead of a dropdown and a filter text box. See how it's done and if it works both with dropdown data and how I learned to filter
- * @todo 
- *   #### List View
- *     DONE --> _1° Requirement_: USE THE BULMA CSS FRAMEWORK! create a list view, whose state starts with all locations, but, when results are filtered, shows only these results. Mobile First! Maybe use an hamburger menu from [Bulma](https://bulma.io/documentation/components/dropdown/)
- *       DONE --> <aside> tagEvent listener for resize and conditional ternary for global.innerWidth >= 700
- *     DONE --> _1° Requirement_: [should I update classes using state, or make components with conditional rendering?](https://stackoverflow.com/questions/36403101/toggle-class-in-react/36404061)
- *     DONE --> _2° Requirement_: When a location in the List-view is clicked, it triggers it's marker's animation and infowindow
- * @todo
- * ## Accessibility
- *   DONE --> add/modify semantic elements and, subsidiarily, `aria roles`
- * @todo
- * ## @todo MAYBE add cms, like squarespace, to retrieve locations data
- *   DONE --> implement API for locations details
-    ```
- */
-
 import React, { Component } from 'react'
 import axios from 'axios'
 import escRegExp from 'escape-string-regexp'
@@ -60,19 +17,13 @@ class App extends Component {
       {venue: {location: {lat: -22.904811, lng: -43.111082}, categories: [{shortName: "Produce Shop"}], name: "Recanto do Jambeiro", description: "Produce Shop", referralId:45}}
     ]
   }
-
-  /*
-   * Add 5 locations with lat/lng, title and description values
-   */
-/*  startingLocations = [
-      {venue: {location: {lat: -22.903260, lng: -43.112730}, name: "Tem Tudo", description: "Utilities Shop", id:"0"}},
-      {venue: {location: {lat: -22.907294, lng: -43.110322}, name: "Casa Moreira e Souza", description: "Construction Shop", id:"1"}},
-      {venue: {location: {lat: -22.907929, lng: -43.108769}, name: "Fix Shoes and Purses", description: "Leather work", id:"2"}},
-      {venue: {location: {lat: -22.903667, lng: -43.113935}, name: "Raia Drugstore", description: "Drugstore", id:"3"}},
-      {venue: {location: {lat: -22.904811, lng: -43.111082}, name: "Recanto do Jambeiro", description: "Produce Shop", id:"4"}}
-    ]
-*/
   handleFilter = (query) => this.setState({ query: query.trim() })
+
+  handleDesktopClickOrEnter = (e, location) => {
+    let arrayOfOneLoc = []
+    arrayOfOneLoc.push(location)
+    this.setState({startingPlaces: arrayOfOneLoc})
+  }
 
   componentDidMount() {
   const endPoint = "https://api.foursquare.com/v2/venues/explore?"
@@ -85,6 +36,7 @@ class App extends Component {
     radius:1000
   }
 
+
   axios.get(endPoint + new URLSearchParams(parameters))
     .then(res => {
       this.setState({startingPlaces: res.data.response.groups[0].items}) 
@@ -93,7 +45,6 @@ class App extends Component {
   }
 
   render() {
-
     const { query } = this.state
 
     let locations = []
@@ -114,7 +65,12 @@ class App extends Component {
           <aside className="menu column is-3-desktop is-hidden-touch" aria-label="locations returned from the search">
             <ul className="menu-list">
               {
-              locations.map(location => <li key={location.venue.name + location.referralId}><a  tabIndex="0">{location.venue.name}</a></li>)
+
+              locations.map(location => <li key={location.venue.name + location.referralId} onKeyPress={(event) => this.handleDesktopClickOrEnter(event, location)} onClick={(e) =>
+                {
+/*                  debugger
+*/                  this.handleDesktopClickOrEnter(e, location)
+                }}><a  tabIndex="0">{location.venue.name}</a></li>)
               }
             </ul>
           </aside>
