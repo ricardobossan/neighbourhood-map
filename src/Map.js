@@ -83,7 +83,7 @@ class Map extends Component {
       const index = document.getElementsByTagName('script')[0];
       index.parentNode.insertBefore(script, index);
       script.addEventListener('load', event => {
-        this.loadAPI()
+        this.loadAPI("map")
       })
     } else {
       this.loadAPI("map")
@@ -91,12 +91,11 @@ class Map extends Component {
   }
 
   render() {
-    console.log(this.props)
     /**
      * Modal for when no location is returned from search
      */
     if(this.props.locations.length !== 5) {
-      this.loadAPI("anotherMapName")
+      this.loadAPI("map")
       if(this.props.locations.length === 0) window.alert("The location you're looking for was not found.")
     }
 

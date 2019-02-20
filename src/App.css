@@ -1,10 +1,16 @@
+body {
+}
+
 header {
   height: 5vh;
 }
 
 aside {
   float:left;
-}
+  height: 95vh;
+/*   left: 100px;
+position: static;
+ */}
 
 .App {
   text-align: center;
