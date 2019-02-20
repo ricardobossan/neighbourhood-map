@@ -1,15 +1,16 @@
 /**
  * # TODOS - [PROJECT SPECIFICATION](https://review.udacity.com/#!/rubrics/1351/view):
 
- * @todo
- * ## (inside Application Functionality / List View)
- *  --> On Filter.js, onChange={if(location.length === 1) new request for data and filter again based on current input value ( App.state.query | e.target.value)}
- *	--> On Map.js, If there's only 1 location left, show it's InfoWindow
- *  --> If that isn't enough, back button (or get all locations again), on top of aside, to call for Squarespace API again
- *	--> On App.js, if (locations.length === 1) stop updating state.startingPlaces COULD CONFLICT WITH ABOVE SAID FILTER AND BACK BUTTON FUNCTIONALITY 
  * ## Offline Use
  *  --> WATCH PLAYLIST REACT SERVICE WORKER (my own)
  *  --> add working service worker, to have offline content when there's no wifi
+ * @todo
+ * ## (inside Application Functionality / List View)
+ *	--> On Map.js, If there's only 1 location left, show it's InfoWindow
+ *  --> If that isn't enough, back button (or get all locations again), on top of aside, to call for Squarespace API again
+ *	--> On App.js, if (locations.length === 1) stop updating state.startingPlaces. 
+ But it COULD CONFLICT WITH ABOVE SAID FILTER AND BACK BUTTON FUNCTIONALITY 
+ *  DONE --> On Filter.js, onChange={if(location.length === 1) new request for data and filter again based on current input value ( App.state.query | e.target.value)}
  * @todo
  * ## FINISH
  *  --> refine style

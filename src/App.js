@@ -67,7 +67,7 @@ class App extends Component {
           onFilter={this.handleFilter}
         />
         <main>
-          <aside className="menu column is-3-desktop is-hidden-touch" aria-label="locations returned from the search">
+          <aside className="menu column is-2-desktop is-hidden-touch" aria-label="locations returned from the search">
             <ul className="menu-list">
               {
 
@@ -77,6 +77,9 @@ class App extends Component {
 */                  this.handleDesktopClickOrEnter(e, location)
                 }}><a  tabIndex="0">{location.venue.name}</a></li>)
               }
+              <li>
+                <button className="button is-danger" style={(locations.length === 5 | locations.length === 11) ? {display:"none"} : {}}>Back</button>
+              </li>
             </ul>
           </aside>
           <Map
