@@ -31,14 +31,16 @@ class Map extends Component {
       const marker = new window.google.maps.Marker({
       position: { lat: loc.venue.location.lat, lng: loc.venue.location.lng },
       icon: image,
-      animation: window.google.maps.Animation.DROP,
-      map: mapName,
+/*      animation: window.google.maps.Animation.DROP,
+*/      map: mapName,
       title: loc.venue.name
       })
-      setTimeout(() => marker.setAnimation(window.google.maps.Animation.BOUNCE), 400)
+/*      setTimeout(() => marker.setAnimation(window.google.maps.Animation.BOUNCE), 400)
       setTimeout(() => marker.setAnimation(null), 700)
-    
-      if(locations.length === 1) {
+*/    console.log(this.props)
+    console.log(this.props.focusedLoc)
+    console.log(loc.referralId)
+      if(this.props.focusedLoc === loc.referralId | locations.length === 1) {
         setTimeout(() => {
           infowindow.setContent(
           `<div class="infoWindow">
