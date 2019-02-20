@@ -17,7 +17,27 @@ class App extends Component {
       {venue: {location: {lat: -22.904811, lng: -43.111082}, categories: [{shortName: "Produce Shop"}], name: "Recanto do Jambeiro", description: "Produce Shop", referralId:45}}
     ]
   }
-  handleFilter = (query) => this.setState({ query: query.trim() })
+  handleFilter = (query) => {
+    this.state.startingPlaces.length === 1 ? this.getDetailsAPI() : console.log('')
+    this.setState({ query: query.trim() })
+  }
+
+  getDetailsAPI = () => {
+    const endPoint = "https://api.foursquare.com/v2/venues/explore?"
+    const parameters = {
+      client_id: "NRQZ3OTXP3KJH05HXL3RKRKRTF3WJW4MCNMHZFPIY3HKVWHH",
+      client_secret: "GTDZ10LLV2HYUJBTSRWV1ULDBWKXBJDZ5EQ4HAEZTCVG4AL4",
+      query: "food",
+      ll: "-22.906151,-43.110378",
+      v: "20190223",
+      radius:1000
+    }
+    axios.get(endPoint + new URLSearchParams(parameters))
+      .then(res => {
+        this.setState({startingPlaces: res.data.response.groups[0].items}) 
+     })
+      .catch(err => console.log(err.response))
+   }
 
   handleDesktopClickOrEnter = (e, location) => {
     let arrayOfOneLoc = []
@@ -26,22 +46,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-  const endPoint = "https://api.foursquare.com/v2/venues/explore?"
-  const parameters = {
-    client_id: "NRQZ3OTXP3KJH05HXL3RKRKRTF3WJW4MCNMHZFPIY3HKVWHH",
-    client_secret: "GTDZ10LLV2HYUJBTSRWV1ULDBWKXBJDZ5EQ4HAEZTCVG4AL4",
-    query: "food",
-    ll: "-22.906151,-43.110378",
-    v: "20190223",
-    radius:1000
-  }
-
-
-  axios.get(endPoint + new URLSearchParams(parameters))
-    .then(res => {
-      this.setState({startingPlaces: res.data.response.groups[0].items}) 
-    })
-    .catch(err => console.log(err.response))
+    this.getDetailsAPI()
   }
 
   render() {

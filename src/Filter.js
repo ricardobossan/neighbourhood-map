@@ -2,15 +2,6 @@ import React, { Component } from 'react'
 
 class Filter extends Component {
 	
-	state = {
-		dropdownState: ""
-	}
-/*
-	componentDidMount() {
-		let triggerLocationsList = document.getElementById('triggerLocationsList')
-		triggerLocationsList.addEventListener('click', () => this.state.dropdownState === "" ? this.setState({dropdownState: "is-active"}) : this.setState({dropdownState: ""}))
-	}
-*/
 	render() {
 
 		const { query, onFilter } = this.props

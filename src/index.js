@@ -2,8 +2,11 @@
  * # TODOS - [PROJECT SPECIFICATION](https://review.udacity.com/#!/rubrics/1351/view):
 
  * @todo
- *  --> filter.js onChange={if(location.length === 1) new request for data and all logic inside filter again}
- *  --> if that isn't enough,back button (or get all locations again), on top of aside, to call for Squarespace API again
+ * ## (inside Application Functionality / List View)
+ *  --> On Filter.js, onChange={if(location.length === 1) new request for data and filter again based on current input value ( App.state.query | e.target.value)}
+ *	--> On Map.js, If there's only 1 location left, show it's InfoWindow
+ *  --> If that isn't enough, back button (or get all locations again), on top of aside, to call for Squarespace API again
+ *	--> On App.js, if (locations.length === 1) stop updating state.startingPlaces COULD CONFLICT WITH ABOVE SAID FILTER AND BACK BUTTON FUNCTIONALITY 
  * ## Offline Use
  *  --> WATCH PLAYLIST REACT SERVICE WORKER (my own)
  *  --> add working service worker, to have offline content when there's no wifi
@@ -17,6 +20,10 @@
  *       - [Prnautica.com, for marker icon](https://prnautica.com/wp-content/uploads/2015/12/map-marker-icon.png)
  *  --> review rubric
  *  --> send project for review
+ *
+ * @todo
+ * ## AFTER GRADUATION, MAYBE
+ *	--> add a input to choose the type of search to make, which should automatically make 2 API calls: one for google maps and another for those addresses in Foursquare.
  *
  * ## DONE
  * @todo OK
