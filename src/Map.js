@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 
-class Map extends Component {
 
+class Map extends Component {
   /**
    * Loads Google Maps API, creates an instance of a map and an InfoWindow.
    */
-  loadAPI(mapName) {
-
+  loadAPI = (mapName) => {
     // Loads API and creates a map.
     mapName = new window.google.maps.Map(
       document.getElementById(this.props.id),
@@ -20,15 +19,15 @@ class Map extends Component {
    * Iterate over locations and add markers to them.
    * Each marker has a click event that, when triggered, will change the InfoWindow's content.
    */
-  loadMarkers(mapName, infowindow, locations) {
+  loadMarkers = (mapName, infowindow, locations) => {
     locations.forEach((loc) => {
-      var image = {
-  url: "https://prnautica.com/wp-content/uploads/2015/12/map-marker-icon.png",
-  size: new window.google.maps.Size(25, 25),
-  origin: new window.google.maps.Point(0, 0),
-  anchor: new window.google.maps.Point(17, 34),
-  scaledSize: new window.google.maps.Size(25, 25)
-};
+      const image = {
+        url: "https://prnautica.com/wp-content/uploads/2015/12/map-marker-icon.png",
+        size: new window.google.maps.Size(25, 25),
+        origin: new window.google.maps.Point(0, 0),
+        anchor: new window.google.maps.Point(17, 34),
+        scaledSize: new window.google.maps.Size(25, 25)
+      };
       const marker = new window.google.maps.Marker({
       position: { lat: loc.venue.location.lat, lng: loc.venue.location.lng },
       icon: image,
@@ -36,18 +35,31 @@ class Map extends Component {
       map: mapName,
       title: loc.venue.name
       })
-      console.log(marker)
       setTimeout(() => marker.setAnimation(window.google.maps.Animation.BOUNCE), 400)
       setTimeout(() => marker.setAnimation(null), 700)
-      // Method call adds Listener for changing InfoWindow's content upon click
-      this.listenInfoWindowChange(mapName, marker, loc, infowindow)
-    })
+    
+      if(locations.length === 1) {
+        setTimeout(() => {
+          infowindow.setContent(
+          `<div class="infoWindow">
+            <div class="infoWindowHeader"><strong>${locations[0].venue.name}</strong></div>
+            <br>
+            <div><strong>Description:</strong> ${locations[0].venue.categories[0].shortName}</div>
+            <div><strong>Address:</strong> ${locations[0].venue.location.formattedAddress[0]}, ${locations[0].venue.location.formattedAddress[1]}</div>
+          </div>`
+          )
+          infowindow.open(mapName, marker)        
+        }, 1200)
+        }
+        // Method call adds Listener for changing InfoWindow's content upon click
+        this.listenInfoWindowChange(mapName, marker, loc, infowindow)
+      })
   }
 
   /**
    * Changes InfoWindow's content when that marker is clicked. Uses reverse geocoding
    */
-  listenInfoWindowChange(mapName, marker, loc, infowindow) {
+  listenInfoWindowChange = (mapName, marker, loc, infowindow) => {
       marker.addListener('click', () => {
         infowindow.setContent(
         `<div class="infoWindow">
@@ -79,8 +91,9 @@ class Map extends Component {
   }
 
   render() {
+    console.log(this.props)
     /**
-     * Modal for when no result is returned from search
+     * Modal for when no location is returned from search
      */
     if(this.props.locations.length !== 5) {
       this.loadAPI("anotherMapName")
