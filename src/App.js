@@ -39,10 +39,14 @@ class App extends Component {
       .catch(err => console.log(err.response))
    }
 
-  handleDesktopClickOrEnter = (e, location) => {
+  handleLocButtonInput = (location) => {
     let arrayOfOneLoc = []
     arrayOfOneLoc.push(location)
     this.setState({startingPlaces: arrayOfOneLoc})
+  }
+
+  handleBackButtonInput = () => {
+    this.getDetailsAPI()
   }
 
   componentDidMount() {
@@ -71,14 +75,20 @@ class App extends Component {
             <ul className="menu-list">
               {
 
-              locations.map(location => <li key={location.venue.name + location.referralId} onKeyPress={(event) => this.handleDesktopClickOrEnter(event, location)} onClick={(e) =>
-                {
-/*                  debugger
-*/                  this.handleDesktopClickOrEnter(e, location)
-                }}><a  tabIndex="0">{location.venue.name}</a></li>)
+              locations.map(location => <li
+                key={location.venue.name + location.referralId}
+                onKeyPress={() => this.handleLocButtonInput(location)}
+                onClick={() => this.handleLocButtonInput(location)}>
+                <a tabIndex="0">{location.venue.name}</a></li>)
               }
               <li>
-                <button className="button is-danger" style={(locations.length === 5 | locations.length === 11) ? {display:"none"} : {}}>Back</button>
+                <button className="button is-small is-danger"
+                onKeyPress={() => this.handleBackButtonInput()}
+                onClick={() => this.handleBackButtonInput()}
+
+                style={(locations.length === 5 | locations.length === 11)
+                  ? {display:"none", tabIndex: 0}
+                  : {tabIndex: 0}}>Back</button>
               </li>
             </ul>
           </aside>
