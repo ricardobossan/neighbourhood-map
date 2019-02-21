@@ -31,28 +31,25 @@ class Map extends Component {
       const marker = new window.google.maps.Marker({
       position: { lat: loc.venue.location.lat, lng: loc.venue.location.lng },
       icon: image,
-/*      animation: window.google.maps.Animation.DROP,
-*/      map: mapName,
+      animation: null,
+      map: mapName,
       title: loc.venue.name
       })
-/*      setTimeout(() => marker.setAnimation(window.google.maps.Animation.BOUNCE), 400)
-      setTimeout(() => marker.setAnimation(null), 700)
-*/    console.log(this.props)
-    console.log(this.props.focusedLoc)
-    console.log(loc.referralId)
       if(this.props.focusedLoc === loc.referralId | locations.length === 1) {
+        marker.setAnimation(window.google.maps.Animation.BOUNCE)
+        setTimeout(() => marker.setAnimation(null), 700)        
         setTimeout(() => {
           infowindow.setContent(
           `<div class="infoWindow">
-            <div class="infoWindowHeader"><strong>${locations[0].venue.name}</strong></div>
+            <div class="infoWindowHeader"><strong>${loc.venue.name}</strong></div>
             <br>
-            <div><strong>Description:</strong> ${locations[0].venue.categories[0].shortName}</div>
-            <div><strong>Address:</strong> ${locations[0].venue.location.formattedAddress[0]}, ${locations[0].venue.location.formattedAddress[1]}</div>
+            <div><strong>Description:</strong> ${loc.venue.categories[0].shortName}</div>
+            <div><strong>Address:</strong> ${loc.venue.location.formattedAddress[0]}, ${loc.venue.location.formattedAddress[1]}</div>
           </div>`
           )
-          infowindow.open(mapName, marker)        
+          this.props.infoWindow == true ? infowindow.open(mapName, marker) : console.log("False")
         }, 1200)
-        }
+      }
         // Method call adds Listener for changing InfoWindow's content upon click
         this.listenInfoWindowChange(mapName, marker, loc, infowindow)
       })
@@ -71,12 +68,12 @@ class Map extends Component {
           <div><strong>Address:</strong> ${loc.venue.location.formattedAddress[0]}, ${loc.venue.location.formattedAddress[1]}</div>
         </div>`
         )
-        infowindow.open(mapName, marker)
-      })
-  }
+/*        this.props.infoWindow == false ? infowindow.close() : console.log('')
+*/      })
+/*        this.props.infoWindow == true ? infowindow.open(mapName, marker) : console.log('')
+*/  }
 
   componentDidMount() {
-
     if (!window.google) {
       const script = document.createElement('script');
       script.src = `https://maps.google.com/maps/api/js?key=AIzaSyCVQUeNoVu_7zHcGYSkSJ-BY1dU6hB_7gM`;
@@ -97,7 +94,7 @@ class Map extends Component {
      * Modal for when no location is returned from search
      */
     if(this.props.locations.length !== 5) {
-      this.loadAPI("map")
+      this.loadAPI("anotherMap")
       if(this.props.locations.length === 0) window.alert("The location you're looking for was not found.")
     }
 

@@ -16,7 +16,8 @@ class App extends Component {
       {venue: {location: {lat: -22.903667, lng: -43.113935}, categories: [{shortName: "Drugstore"}], name: "Raia Drugstore", description: "Drugstore"}, referralId:34},
       {venue: {location: {lat: -22.904811, lng: -43.111082}, categories: [{shortName: "Produce Shop"}], name: "Recanto do Jambeiro", description: "Produce Shop"}, referralId:45}
     ],
-    focusedLoc: ""
+    focusedLoc: "",
+    infoWindow: false
   }
 
   getDetailsAPI = () => {
@@ -43,8 +44,10 @@ class App extends Component {
 
   handleLocFocus = (location) => {
 /*    debugger
-*/    this.setState({focusedLoc: location.referralId})
+*/    this.setState({focusedLoc: location.referralId, infoWindow: true})
   }
+
+  handleBlur = (location) => this.setState({infoWindow: false})
 
   handleLocButtonInput = (location) => {
     let arrayOfOneLoc = []
@@ -86,6 +89,7 @@ class App extends Component {
               locations.map(location => <li
                 key={location.venue.name + location.referralId}
                 onFocus={() => this.handleLocFocus(location)}
+                onBlur={() => this.handleBlur(location)}
                 onKeyPress={() => this.handleLocButtonInput(location)}
                 onClick={() => this.handleLocButtonInput(location)}>
                 <a tabIndex="0">{location.venue.name}</a></li>)
@@ -109,6 +113,7 @@ class App extends Component {
             }}
             locations={locations}
             focusedLoc={this.state.focusedLoc}
+            infoWindow={this.state.infoWindow}
           />         
         </main>
       </div>
