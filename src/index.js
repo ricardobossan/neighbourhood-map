@@ -7,6 +7,8 @@
  *	--> try to get initial data from localStorage (obviously, you'll first have to set localStorage with the fetched foursquare API results)
  * @todo
  * ## (inside Application Functionality / List View)
+ *	--> https://builtvisible.com/hierarchical-composed-state-react-js/
+ *	--> https://reactjs.org/docs/context.html
  *	--> locations bar, when a location is focused, state changes, so it's infoWindow will show on true, because props true for that referral ID 'll will be passed upon it on focus
  *	--> On Map.js, If there's only 1 location left, show it's InfoWindow
  *  --> If that isn't enough, back button (or get all locations again), on top of aside, to call for Squarespace API again
@@ -71,6 +73,6 @@ ReactDOM.render(<App />, document.getElementById('root'));
 	.catch((err) => {
 		console.log("Service worker: failed to register", err);
 	});
-*/
-/*Antes era algo assim, criado na CLI pelo create-react-app*/
-/*serviceWorker.unregister()*/
+
+*//*Antes era algo assim, criado na CLI pelo create-react-app*/
+registerServiceWorker();
