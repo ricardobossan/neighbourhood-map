@@ -10,7 +10,7 @@ class Filter extends Component {
 			<div tabIndex="-1">
 				<header className="column navbar is-primary">
 					<div className="is-hidden-desktop" aria-live="assertive" aria-atomic="true" >
-						<input defaultValue="" value={query} onChange={(event) => onFilter(event.target.value)} placeholder="Input is case sensitive" list="myLocations" id="location-choice" name="location-choice" aria-label="Search locations (Case Sensitive" />
+						<input onFocus={() => this.props.handleDatalistFocus()} onBlur={() => this.props.handleDatalistBlur()} defaultValue="" value={query} onChange={(event) => onFilter(event.target.value)} placeholder="Input is case sensitive" list="myLocations" id="location-choice" name="location-choice" aria-label="Search locations (Case Sensitive" />
 						<datalist id="myLocations" style={{"margin":"auto"}}>
 						{
 							/* filteredResult ? filteredResult : startingLocations */

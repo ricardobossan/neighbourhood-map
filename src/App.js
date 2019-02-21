@@ -60,6 +60,14 @@ class App extends Component {
     this.getDetailsAPI()
   }
 
+  handleDatalistFocus = () => {
+    this.setState({infoWindow: true})
+  }
+
+  handleDatalistBlur = () => {
+    this.setState({infoWindow: false})
+  }
+
   componentDidMount() {
     this.getDetailsAPI()
   }
@@ -80,6 +88,8 @@ class App extends Component {
         <Filter
           locations={locations}
           onFilter={this.handleFilter}
+          handleDatalistFocus={this.handleDatalistFocus}
+          handleDatalistBlur={this.handleDatalistBlur}
         />
         <main>
           <aside className="menu column is-2-desktop is-hidden-touch" style={{overflowY: "scroll", scrollBehavior: "smooth"}} aria-label="locations returned from the search">

@@ -2,16 +2,6 @@
  * # TODOS - [PROJECT SPECIFICATION](https://review.udacity.com/#!/rubrics/1351/view):
 
  * @todo
- * ## (inside Application Functionality / List View)
- *	--> https://builtvisible.com/hierarchical-composed-state-react-js/
- *	--> https://reactjs.org/docs/context.html
- *	--> locations bar, when a location is focused, state changes, so it's infoWindow will show on true, because props true for that referral ID 'll will be passed upon it on focus
- *	--> On Map.js, If there's only 1 location left, show it's InfoWindow
- *  --> If that isn't enough, back button (or get all locations again), on top of aside, to call for Squarespace API again
- *	--> On App.js, if (locations.length === 1) stop updating state.startingPlaces. 
- But it COULD CONFLICT WITH ABOVE SAID FILTER AND BACK BUTTON FUNCTIONALITY 
- *  DONE --> On Filter.js, onChange={if(location.length === 1) new request for data and filter again based on current input value ( App.state.query | e.target.value)}
- * @todo
  * ## FINISH
  *  --> refine style
  *  --> comment the whole thing
@@ -52,7 +42,13 @@
  *      DONE --> <aside> tagEvent listener for resize and conditional ternary for global.innerWidth >= 700
  *      DONE --> _1° Requirement_: [should I update classes using state, or make components with conditional rendering?](https://stackoverflow.com/questions/36403101/toggle-class-in-react/36404061)
  *      DONE --> _2° Requirement_: When a location in the List-view is clicked, it triggers it's marker's animation and infowindow
- * @todo
+ *			DONE --> locations bar, when a location is focused, state changes, so it's infoWindow will show on true, because props true for that referral ID 'll will be passed upon it on focus
+ *			DONE --> On Map.js, If there's only 1 location left, show it's InfoWindow
+ *  		DONE --> If that isn't enough, back button (or get all locations again), on top of aside, to call for Squarespace API again
+ *  		DONE --> On Filter.js, onChange={if(location.length === 1) new request for data and filter again based on current input value ( App.state.query | e.target.value)}
+ *			OPTIONAL --> https://builtvisible.com/hierarchical-composed-state-react-js/
+ *			OPTIONAL --> https://reactjs.org/docs/context.html
+* @todo
  * ## Accessibility
  *  DONE --> add/modify semantic elements and, subsidiarily, `aria roles`
  * @todo
