@@ -53,6 +53,8 @@ class App extends Component {
     this.setState({ query: query.trim(), alreadyCalled: false })
   }
 
+  handleAlreadyCalled = () => this.setState({alreadyCalled: true})
+
   handleLocFocus = (location) => {
 /*    debugger
 */    this.setState({focusedLoc: location.referralId, infoWindow: true})
@@ -101,7 +103,7 @@ class App extends Component {
       navigator.onLine
       ? window.alert("The location you're looking for was not found.")
       : window.alert("Please check your connection.")      
-      this.setState({alreadyCalled: true})
+      this.handleAlreadyCalled()
     }
 
     return (
