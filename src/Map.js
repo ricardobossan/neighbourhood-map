@@ -97,14 +97,9 @@ class Map extends Component {
   }
 
   render() {
-    /**
-     * Modal for when no location is returned from search
-     */
-    if(this.props.locations.length !== 5) {
+    // Ensures the markers and infowindows are reloaded when the locations are first updated
+    if(this.props.locations.length !== 5) {      
       this.loadAPI("anotherMap")
-      if(this.props.locations.length === 0) navigator.onLine
-        ? window.alert("The location you're looking for was not found.")
-        : window.alert("Please check your connection.")
     }
 
     return (

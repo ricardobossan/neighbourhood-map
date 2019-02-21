@@ -3,7 +3,7 @@
 
  * @todo
  * ## FINISH
- *  --> refine style
+ *  DONE --> refine style
  *  --> comment the whole thing
  *  --> complete README
  *    --> Credits due:
@@ -68,12 +68,4 @@ ReactDOM.render(<App />, document.getElementById('root'));
 /**
  * Registers service worker
  */
-/*navigator.serviceWorker
-	.register('sw.js').then(reg => console.log('Service Worker: registered', reg)
-	)
-	.catch((err) => {
-		console.log("Service worker: failed to register", err);
-	});
-
-*//*Antes era algo assim, criado na CLI pelo create-react-app*/
 serviceWorker.register()

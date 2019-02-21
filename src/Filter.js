@@ -18,7 +18,7 @@ class Filter extends Component {
 						}
 						</datalist>
 					</div>
-					<input className="is-hidden-touch" defaultValue="" value={query} onChange={(event) => onFilter(event.target.value)} placeholder="Input is case sensitive" type="text" name="location-choice" aria-label="Search Locations (Case Sensitive" />
+					<input className="is-hidden-touch" defaultValue="" onFocus={() => this.props.handleDatalistFocus()} onBlur={() => this.props.handleDatalistBlur()} value={query} onChange={(event) => onFilter(event.target.value)} placeholder="Input is case sensitive" type="text" name="location-choice" aria-label="Search Locations (Case Sensitive" />
 
 				</header>
 			</div>
