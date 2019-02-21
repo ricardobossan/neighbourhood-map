@@ -6,6 +6,13 @@ class Map extends Component {
    * Loads Google Maps API, creates an instance of a map and an InfoWindow.
    */
   loadAPI = (mapName) => {
+    /**
+     * lets the user know if there's no internet connection to display the map.
+     */
+     navigator.onLine
+     ? console.log("Online. Map should display properly")
+     : window.alert("The map may not be displayed. Please check your connection.")
+
     // Loads API and creates a map.
     mapName = new window.google.maps.Map(
       document.getElementById(this.props.id),
@@ -95,7 +102,9 @@ class Map extends Component {
      */
     if(this.props.locations.length !== 5) {
       this.loadAPI("anotherMap")
-      if(this.props.locations.length === 0) window.alert("The location you're looking for was not found.")
+      if(this.props.locations.length === 0) navigator.onLine
+        ? window.alert("The location you're looking for was not found.")
+        : window.alert("Please check your connection.")
     }
 
     return (
