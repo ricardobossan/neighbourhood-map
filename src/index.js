@@ -1,10 +1,6 @@
 /**
  * # TODOS - [PROJECT SPECIFICATION](https://review.udacity.com/#!/rubrics/1351/view):
 
- * ## Offline Use
- *  --> WATCH PLAYLIST REACT SERVICE WORKER (my own)
- *  --> add working service worker, to have offline content when there's no wifi
- *	--> try to get initial data from localStorage (obviously, you'll first have to set localStorage with the fetched foursquare API results)
  * @todo
  * ## (inside Application Functionality / List View)
  *	--> https://builtvisible.com/hierarchical-composed-state-react-js/
@@ -32,6 +28,15 @@
  *
  * ## DONE
  * @todo OK
+ * ## Offline Use
+ *  DONE --> add working service worker, to have offline content when there's no wifi
+ *	DONE --> handle possible lack of functionality due to loss of internet connection with alerts.
+ *		- Search bar (mobile and desktop)
+ *		- Map
+ *		- InfoWindow: the alert for map already lets the user know there's no internet connection
+ *	OPTIONAL --> Save all information about how to run the site with service worker, in order to make a guide in README.md, with references
+ *  OPTIONAL --> WATCH PLAYLIST REACT SERVICE WORKER (my own)
+ *	OPTIONAL --> try to get initial data from localStorage (obviously, you'll first have to set localStorage with the fetched foursquare API results)
  * ## Interface Design
  *  DONE --> Make application responsive on any device
  * ## Application Functionality
@@ -60,8 +65,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-/*import * as serviceWorker from './serviceWorker';
-*/
+import * as serviceWorker from './serviceWorker';
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 /**
@@ -75,4 +80,4 @@ ReactDOM.render(<App />, document.getElementById('root'));
 	});
 
 *//*Antes era algo assim, criado na CLI pelo create-react-app*/
-registerServiceWorker();
+serviceWorker.register()
