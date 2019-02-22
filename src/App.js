@@ -11,9 +11,6 @@ class App extends Component {
    * Initial state "startingPlaces" so the map component has locations passed in as props to iterate over on and create markers and infowindows, even if there's no internet connection
    */
   state = {
-    query: "",
-    alreadyCalled: false,
-    badConnectionCalled: false,
     startingPlaces: [
       {venue: {location: {lat: -22.903260, lng: -43.112730}, categories: [{shortName: "Store"}], name: "Tem Tudo", description: "Utilities Shop"}, referralId: 10},
       {venue: {location: {lat: -22.907294, lng: -43.110322}, categories: [{shortName: "Hardware Store"}], name: "Casa Moreira e Souza", description: "Construction Shop"}, referralId: 12},
@@ -21,8 +18,16 @@ class App extends Component {
       {venue: {location: {lat: -22.903667, lng: -43.113935}, categories: [{shortName: "Drugstore"}], name: "Raia Drugstore", description: "Drugstore"}, referralId: 34},
       {venue: {location: {lat: -22.904811, lng: -43.111082}, categories: [{shortName: "Produce Shop"}], name: "Recanto do Jambeiro", description: "Produce Shop"}, referralId: 45}
     ],
+    mapCalled: 0,
+    query: "",
+    alreadyCalled: false,
+    badConnectionCalled: false,
     focusedLoc: "",
     infoWindow: false
+  }
+
+  componentDidMount() {
+    this.getDetailsAPI()
   }
 
   /**
@@ -51,16 +56,11 @@ class App extends Component {
    * 
    */
   handleFilter = (query) => {
-    this.setState({ query: query.trim(), alreadyCalled: false })
+    this.setState({ query: query.trim(), alreadyCalled: false, badConnectionCalled: false, mapCalled: false })
   }
 
-  handleAlreadyCalled = () => this.setState({alreadyCalled: true})
-
-  handleBadConnectionCalled = () => this.setState({badConnectionCalled: true})
-
   handleLocFocus = (location) => {
-/*    debugger
-*/    this.setState({focusedLoc: location.referralId, infoWindow: true})
+    this.setState({focusedLoc: location.referralId, infoWindow: true})
   }
 
   handleBlur = (location) => this.setState({infoWindow: false})
@@ -72,7 +72,7 @@ class App extends Component {
   }
 
   handleBackButtonInput = () => {
-    this.setState({query: "", alreadyCalled: false})
+    this.setState({query: "", alreadyCalled: false, badConnectionCalled: false, mapCalled: false })
     this.getDetailsAPI()
   }
 
@@ -84,20 +84,27 @@ class App extends Component {
     this.setState({infoWindow: false})
   }
 
-  componentDidMount() {
-    this.getDetailsAPI()
-  }
-
-/*  componentDidUpdate() {
-    if(navigator.onLine === false && this.state.alreadyCalled === false) {
-      window.alert("Please check your connection.")
-      this.handleBadConnectionCalled()
+  /* Methods below are dedicated to avoiding infinite alert repetition on on loading Map or Locations */
+  handleMapCalled = () => {
+    this.setState((prevState) => ({mapCalled: prevState.mapCalled + 1}))
+    if(this.state.mapCalled === 5000) {
+      window.alert("The map may not be displayed. Please check your connection.")
+      this.setStsate({mapCalled: 0})
     }
   }
-*/
+
+  handleAlreadyCalled = () => this.setState({alreadyCalled: true})
+
+  handleBadConnectionCalled = () => this.setState({badConnectionCalled: true})
+
+/* ######################## STARTS HERE: MARKERS & INFOWINDOW ########################*/
+
+
+
+/* ######################## ENDS HERE: MARKERS & INFOWINDOW ########################*/
+
   render() {
     const { query } = this.state
-
     let locations = []
     if(query.length > 0) {
       const match = new RegExp(escRegExp(query, 'i'))
@@ -105,11 +112,11 @@ class App extends Component {
     } else {
         locations = this.state.startingPlaces
       }
-    // load Modal for when no location is returned from search, due to not finding a match.
+    /* Call handlers to alert to the user if a online word search finds no locations, if the search for that word wasn't just made */
     if(navigator.onLine === true && locations.length === 0 && this.state.alreadyCalled === false) {
       window.alert("The location you're looking for was not found.")
       this.handleAlreadyCalled()
-    // load Modal for when no location is returned from search, due to bad connection
+    /* Call handlers to alert to the user if a offline word search finds no locations, if the search for that word wasn't just made */
     } else if(navigator.onLine === false && locations.length === 0 && this.state.badConnectionCalled === false) {
       window.alert("Please check your connection.")
       this.handleBadConnectionCalled()
@@ -148,12 +155,13 @@ class App extends Component {
             </ul>
           </aside>
           <Map
-            id="map"
+            mapId="map"
             options={{
               center: { lat: -22.906151, lng: -43.110378 },
               zoom: 15
             }}
             locations={locations}
+            onMapCalled={this.handleMapCalled.bind(this)}
             focusedLoc={this.state.focusedLoc}
             infoWindow={this.state.infoWindow}
           />         

@@ -6,16 +6,10 @@ class Map extends Component {
    * Loads Google Maps API, creates an instance of a map and an InfoWindow.
    */
   loadAPI = (mapName) => {
-    /**
-     * lets the user know if there's no internet connection to display the map.
-     */
-/*     navigator.onLine
-     ? console.log("Online. Map should display properly")
-     : window.alert("The map may not be displayed. Please check your connection.")
-*/
+
     // Loads API and creates a map.
     mapName = new window.google.maps.Map(
-      document.getElementById(this.props.id),
+      document.getElementById(this.props.mapId),
       this.props.options);
     // Create only one instance of the InfoWindow, whose values will change as each marker is clicked.
     const infowindow = new window.google.maps.InfoWindow()
@@ -89,14 +83,24 @@ class Map extends Component {
       const index = document.getElementsByTagName('script')[0];
       index.parentNode.insertBefore(script, index);
       script.addEventListener('load', event => {
-        this.loadAPI("map")
+        this.loadAPI(this.props.mapId)
       })
     } else {
-      this.loadAPI("map")
+      this.loadAPI(this.props.mapId)
     }
   }
 
   render() {
+    /**
+     * lets the user know if there's no internet connection to display the map.
+     */
+    setTimeout(() => {
+    if(navigator.onLine === false) {
+      this.props.onMapCalled()
+    }  
+      
+    }, 5000)
+
     // Ensures the markers and infowindows are reloaded when the locations are first updated
     if(this.props.locations.length !== 5) {      
       this.loadAPI("anotherMap")
@@ -106,7 +110,7 @@ class Map extends Component {
       /**
        * Renders map
        */
-      <section className="map" style={{height: "95vh"}} id={this.props.id} aria-label="map"/>
+      <section className={this.props.mapId} style={{height: "95vh"}} id={this.props.mapId} aria-label={this.props.mapId}/>
     );
   }
 }

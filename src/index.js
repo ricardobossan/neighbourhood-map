@@ -2,6 +2,9 @@
  * # TODOS - [PROJECT SPECIFICATION](https://review.udacity.com/#!/rubrics/1351/view):
 
  * @todo
+ * ## Map or something
+ *	--> NEW BRANCH: may pass a callback from App into Map, which will trigger a method App.this.handleMarkerInfo(infowindow, markers) para que esses 2 argumentos (usando bind em maps, talvez) possam ser referenciados em Map e atualizados em App. Aí em 
+ * @todo
  * ## Offline Use
  *  DONE --> add working service worker, to have offline content when there's no wifi
  *	DONE --> handle possible lack of functionality due to loss of internet connection with alerts.
