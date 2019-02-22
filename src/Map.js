@@ -9,10 +9,10 @@ class Map extends Component {
     /**
      * lets the user know if there's no internet connection to display the map.
      */
-     navigator.onLine
+/*     navigator.onLine
      ? console.log("Online. Map should display properly")
      : window.alert("The map may not be displayed. Please check your connection.")
-
+*/
     // Loads API and creates a map.
     mapName = new window.google.maps.Map(
       document.getElementById(this.props.id),

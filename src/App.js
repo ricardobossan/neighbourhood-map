@@ -13,6 +13,7 @@ class App extends Component {
   state = {
     query: "",
     alreadyCalled: false,
+    badConnectionCalled: false,
     startingPlaces: [
       {venue: {location: {lat: -22.903260, lng: -43.112730}, categories: [{shortName: "Store"}], name: "Tem Tudo", description: "Utilities Shop"}, referralId: 10},
       {venue: {location: {lat: -22.907294, lng: -43.110322}, categories: [{shortName: "Hardware Store"}], name: "Casa Moreira e Souza", description: "Construction Shop"}, referralId: 12},
@@ -55,6 +56,8 @@ class App extends Component {
 
   handleAlreadyCalled = () => this.setState({alreadyCalled: true})
 
+  handleBadConnectionCalled = () => this.setState({badConnectionCalled: true})
+
   handleLocFocus = (location) => {
 /*    debugger
 */    this.setState({focusedLoc: location.referralId, infoWindow: true})
@@ -83,13 +86,17 @@ class App extends Component {
 
   componentDidMount() {
     this.getDetailsAPI()
-
-
-
   }
 
+/*  componentDidUpdate() {
+    if(navigator.onLine === false && this.state.alreadyCalled === false) {
+      window.alert("Please check your connection.")
+      this.handleBadConnectionCalled()
+    }
+  }
+*/
   render() {
-    const { query} = this.state
+    const { query } = this.state
 
     let locations = []
     if(query.length > 0) {
@@ -98,12 +105,14 @@ class App extends Component {
     } else {
         locations = this.state.startingPlaces
       }
-    // loads Modals for when no location is returned from search, either for no match, or bad connection
-    if(locations.length === 0 && this.state.alreadyCalled === false) {
-      navigator.onLine
-      ? window.alert("The location you're looking for was not found.")
-      : window.alert("Please check your connection.")      
+    // load Modal for when no location is returned from search, due to not finding a match.
+    if(navigator.onLine === true && locations.length === 0 && this.state.alreadyCalled === false) {
+      window.alert("The location you're looking for was not found.")
       this.handleAlreadyCalled()
+    // load Modal for when no location is returned from search, due to bad connection
+    } else if(navigator.onLine === false && locations.length === 0 && this.state.badConnectionCalled === false) {
+      window.alert("Please check your connection.")
+      this.handleBadConnectionCalled()
     }
 
     return (

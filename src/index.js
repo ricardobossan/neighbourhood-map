@@ -2,6 +2,17 @@
  * # TODOS - [PROJECT SPECIFICATION](https://review.udacity.com/#!/rubrics/1351/view):
 
  * @todo
+ * ## Offline Use
+ *  DONE --> add working service worker, to have offline content when there's no wifi
+ *	DONE --> handle possible lack of functionality due to loss of internet connection with alerts.
+ *	--> Alerts for loss of connection for 0 locations and for map load are repeating themselves. Implement the same way I did for search with App.state.alreadyCalled
+ *		- Search bar (mobile and desktop)
+ *		- Map
+ *		- InfoWindow: the alert for map already lets the user know there's no internet connection
+ *	OPTIONAL --> Save all information about how to run the site with service worker, in order to make a guide in README.md, with references
+ *  OPTIONAL --> WATCH PLAYLIST REACT SERVICE WORKER (my own)
+ *	OPTIONAL --> try to get initial data from localStorage (obviously, you'll first have to set localStorage with the fetched foursquare API results)
+ * @todo
  * ## FINISH
  *  DONE --> refine style
  *  --> comment the whole thing
@@ -17,16 +28,6 @@
  *	--> add a input to choose the type of search to make, which should automatically make 2 API calls: one for google maps and another for those addresses in Foursquare.
  *
  * ## DONE
- * @todo OK
- * ## Offline Use
- *  DONE --> add working service worker, to have offline content when there's no wifi
- *	DONE --> handle possible lack of functionality due to loss of internet connection with alerts.
- *		- Search bar (mobile and desktop)
- *		- Map
- *		- InfoWindow: the alert for map already lets the user know there's no internet connection
- *	OPTIONAL --> Save all information about how to run the site with service worker, in order to make a guide in README.md, with references
- *  OPTIONAL --> WATCH PLAYLIST REACT SERVICE WORKER (my own)
- *	OPTIONAL --> try to get initial data from localStorage (obviously, you'll first have to set localStorage with the fetched foursquare API results)
  * ## Interface Design
  *  DONE --> Make application responsive on any device
  * ## Application Functionality
