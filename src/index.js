@@ -3,9 +3,11 @@
 
  * @todo
  * ## Map or something
+ *	--> had to modfy Map.js around line 105, because loadAPI would launch too fast and error would be thrown. Have to address this and separate map from markers and infowindows
  *	--> NEW BRANCH: may pass a callback from App into Map, which will trigger a method App.this.handleMarkerInfo(infowindow, markers) para que esses 2 argumentos (usando bind em maps, talvez) possam ser referenciados em Map e atualizados em App. Aí em 
  * @todo
  * ## Offline Use
+ *	DONE --> Made locations available offline with localStorage
  *  DONE --> add working service worker, to have offline content when there's no wifi
  *	DONE --> handle possible lack of functionality due to loss of internet connection with alerts.
  *	--> Alerts for loss of connection for 0 locations and for map load are repeating themselves. Implement the same way I did for search with App.state.alreadyCalled

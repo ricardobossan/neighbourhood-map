@@ -101,10 +101,17 @@ class Map extends Component {
       
     }, 5000)
 
+
+    /**
+     * ATENTION!!!!
+     */
     // Ensures the markers and infowindows are reloaded when the locations are first updated
     if(this.props.locations.length !== 5) {      
-      this.loadAPI("anotherMap")
     }
+    setTimeout(() => {
+
+      this.loadAPI("anotherMap")
+    }, 1000)
 
     return (
       /**

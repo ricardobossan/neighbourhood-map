@@ -28,13 +28,18 @@ class App extends Component {
 
   componentDidMount() {
     this.getDetailsAPI()
-  }
+    }
 
   /**
    * @method
    * Calls the Foursquare API, with the locations 
    */
   getDetailsAPI = () => {
+    if(localStorage.locations) {
+      this.setState({startingPlaces: JSON.parse(localStorage.locations)})
+      return
+    }
+
     const endPoint = "https://api.foursquare.com/v2/venues/explore?"
     const parameters = {
       client_id: "NRQZ3OTXP3KJH05HXL3RKRKRTF3WJW4MCNMHZFPIY3HKVWHH",
@@ -46,10 +51,12 @@ class App extends Component {
     }
     axios.get(endPoint + new URLSearchParams(parameters))
     .then(res => {
-      this.setState({startingPlaces: res.data.response.groups[0].items}) 
+      localStorage.setItem("locations", JSON.stringify(res.data.response.groups[0].items))
+      this.setState({startingPlaces:res.data.response.groups[0].items}) 
    })
     .catch(err => console.log(err.response))
   }
+
 
   /**
    * @method
