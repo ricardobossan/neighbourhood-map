@@ -5,22 +5,26 @@ class Map extends Component {
   /**
    * Loads Google Maps API, creates an instance of a map and an InfoWindow.
    */
-  loadAPI = (mapName) => {
+  loadAPI = () => {
 
     // Loads API and creates a map.
-    mapName = new window.google.maps.Map(
+    const map = new window.google.maps.Map(
       document.getElementById(this.props.mapId),
       this.props.options);
+
+    window.map = map
+
     // Create only one instance of the InfoWindow, whose values will change as each marker is clicked.
-    const infowindow = new window.google.maps.InfoWindow()
-    this.loadMarkers(mapName, infowindow, this.props.locations)
+    this.loadMarkers(window.map, this.props.locations)
   }
 
   /**
    * Iterate over locations and add markers to them.
    * Each marker has a click event that, when triggered, will change the InfoWindow's content.
    */
-  loadMarkers = (mapName, infowindow, locations) => {
+  loadMarkers = (map, locations) => {
+    const infowindow = new window.google.maps.InfoWindow()
+
     locations.forEach((loc) => {
       const image = {
         url: "https://prnautica.com/wp-content/uploads/2015/12/map-marker-icon.png",
@@ -33,7 +37,7 @@ class Map extends Component {
       position: { lat: loc.venue.location.lat, lng: loc.venue.location.lng },
       icon: image,
       animation: null,
-      map: mapName,
+      map: map,
       title: loc.venue.name
       })
       if(this.props.focusedLoc === loc.referralId | locations.length === 1) {
@@ -48,18 +52,18 @@ class Map extends Component {
             <div><strong>Address:</strong> ${loc.venue.location.formattedAddress[0]}, ${loc.venue.location.formattedAddress[1]}</div>
           </div>`
           )
-          this.props.infoWindow == true ? infowindow.open(mapName, marker) : console.log("False")
+          this.props.infoWindow == true ? infowindow.open(map, marker) : console.log("False")
         }, 1200)
       }
         // Method call adds Listener for changing InfoWindow's content upon click
-        this.listenInfoWindowChange(mapName, marker, loc, infowindow)
+        this.listenInfoWindowChange(map, marker, loc, infowindow)
       })
   }
 
   /**
    * Changes InfoWindow's content when that marker is clicked. Uses reverse geocoding
    */
-  listenInfoWindowChange = (mapName, marker, loc, infowindow) => {
+  listenInfoWindowChange = (map, marker, loc, infowindow) => {
       marker.addListener('click', () => {
         infowindow.setContent(
         `<div class="infoWindow">
@@ -71,7 +75,7 @@ class Map extends Component {
         )
 /*        this.props.infoWindow == false ? infowindow.close() : console.log('')
 */      })
-/*        this.props.infoWindow == true ? infowindow.open(mapName, marker) : console.log('')
+/*        this.props.infoWindow == true ? infowindow.open(map, marker) : console.log('')
 */  }
 
   componentDidMount() {
@@ -83,10 +87,10 @@ class Map extends Component {
       const index = document.getElementsByTagName('script')[0];
       index.parentNode.insertBefore(script, index);
       script.addEventListener('load', event => {
-        this.loadAPI(this.props.mapId)
+        this.loadAPI()
       })
     } else {
-      this.loadAPI(this.props.mapId)
+      this.loadAPI()
     }
   }
 
