@@ -111,6 +111,8 @@ class App extends Component {
 /* ######################## ENDS HERE: MARKERS & INFOWINDOW ########################*/
 
   render() {
+    setTimeout(() => console.log(window.map), 2000)
+    
     const { query } = this.state
     let locations = []
     if(query.length > 0) {

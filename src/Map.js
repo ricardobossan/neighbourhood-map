@@ -15,7 +15,6 @@ class Map extends Component {
     window.map = map
 
     // Create only one instance of the InfoWindow, whose values will change as each marker is clicked.
-    this.loadMarkers(window.map, this.props.locations)
   }
 
   /**
@@ -23,24 +22,25 @@ class Map extends Component {
    * Each marker has a click event that, when triggered, will change the InfoWindow's content.
    */
   loadMarkers = (map, locations) => {
+    window.markers.forEach(marker => marker.setMap(null))
+    const image = {
+      url: "https://prnautica.com/wp-content/uploads/2015/12/map-marker-icon.png",
+      size: new window.google.maps.Size(25, 25),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(17, 34),
+      scaledSize: new window.google.maps.Size(25, 25)
+    };
     const infowindow = new window.google.maps.InfoWindow()
 
-    locations.forEach((loc) => {
-      const image = {
-        url: "https://prnautica.com/wp-content/uploads/2015/12/map-marker-icon.png",
-        size: new window.google.maps.Size(25, 25),
-        origin: new window.google.maps.Point(0, 0),
-        anchor: new window.google.maps.Point(17, 34),
-        scaledSize: new window.google.maps.Size(25, 25)
-      };
-      const marker = new window.google.maps.Marker({
+    locations.forEach((loc, i) => {
+      window.markers.push(new window.google.maps.Marker({
       position: { lat: loc.venue.location.lat, lng: loc.venue.location.lng },
       icon: image,
       animation: null,
       map: map,
       title: loc.venue.name
-      })
-      if(this.props.focusedLoc === loc.referralId | locations.length === 1) {
+      }))
+/*      if(this.props.focusedLoc === loc.referralId | locations.length === 1) {
         marker.setAnimation(window.google.maps.Animation.BOUNCE)
         setTimeout(() => marker.setAnimation(null), 700)        
         setTimeout(() => {
@@ -57,7 +57,8 @@ class Map extends Component {
       }
         // Method call adds Listener for changing InfoWindow's content upon click
         this.listenInfoWindowChange(map, marker, loc, infowindow)
-      })
+*/      })
+    console.log(window.markers)
   }
 
   /**
@@ -79,6 +80,7 @@ class Map extends Component {
 */  }
 
   componentDidMount() {
+    window.markers = []
     if (!window.google) {
       const script = document.createElement('script');
       script.src = `https://maps.google.com/maps/api/js?key=AIzaSyCVQUeNoVu_7zHcGYSkSJ-BY1dU6hB_7gM`;
@@ -88,10 +90,12 @@ class Map extends Component {
       index.parentNode.insertBefore(script, index);
       script.addEventListener('load', event => {
         this.loadAPI()
+
       })
     } else {
       this.loadAPI()
     }
+    setTimeout(() => this.loadMarkers(window.map, this.props.locations), 1000)
   }
 
   render() {
@@ -114,7 +118,8 @@ class Map extends Component {
     }
     setTimeout(() => {
 
-      this.loadAPI("anotherMap")
+    this.loadMarkers(window.map, this.props.locations)
+
     }, 1000)
 
     return (

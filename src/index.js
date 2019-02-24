@@ -3,7 +3,6 @@
 
  * @todo
  * ## Map or something
- *	--> had to modfy Map.js around line 105, because loadAPI would launch too fast and error would be thrown. Have to address this and separate map from markers and infowindows
  *	--> NEW BRANCH: may pass a callback from App into Map, which will trigger a method App.this.handleMarkerInfo(infowindow, markers) para que esses 2 argumentos (usando bind em maps, talvez) possam ser referenciados em Map e atualizados em App. Aí em 
  * @todo
  * ## Offline Use
