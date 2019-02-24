@@ -22,6 +22,7 @@ class Map extends Component {
    * Each marker has a click event that, when triggered, will change the InfoWindow's content.
    */
   loadMarkers = (map, locations) => {
+    const infowindow = new window.google.maps.InfoWindow()
     window.markers.forEach(marker => marker.setMap(null))
     const image = {
       url: "https://prnautica.com/wp-content/uploads/2015/12/map-marker-icon.png",
@@ -30,19 +31,18 @@ class Map extends Component {
       anchor: new window.google.maps.Point(17, 34),
       scaledSize: new window.google.maps.Size(25, 25)
     };
-    const infowindow = new window.google.maps.InfoWindow()
 
     locations.forEach((loc, i) => {
-      window.markers.push(new window.google.maps.Marker({
+      window.markers.push(i = new window.google.maps.Marker({
       position: { lat: loc.venue.location.lat, lng: loc.venue.location.lng },
       icon: image,
       animation: null,
       map: map,
       title: loc.venue.name
       }))
-/*      if(this.props.focusedLoc === loc.referralId | locations.length === 1) {
-        marker.setAnimation(window.google.maps.Animation.BOUNCE)
-        setTimeout(() => marker.setAnimation(null), 700)        
+      if(this.props.focusedLoc === loc.referralId | locations.length === 1) {
+        i.setAnimation(window.google.maps.Animation.BOUNCE)
+        setTimeout(() => i.setAnimation(null), 700)        
         setTimeout(() => {
           infowindow.setContent(
           `<div class="infoWindow">
@@ -52,12 +52,12 @@ class Map extends Component {
             <div><strong>Address:</strong> ${loc.venue.location.formattedAddress[0]}, ${loc.venue.location.formattedAddress[1]}</div>
           </div>`
           )
-          this.props.infoWindow == true ? infowindow.open(map, marker) : console.log("False")
+          this.props.infoWindow == true ? infowindow.open(map, i) : console.log("False")
         }, 1200)
       }
         // Method call adds Listener for changing InfoWindow's content upon click
-        this.listenInfoWindowChange(map, marker, loc, infowindow)
-*/      })
+        this.listenInfoWindowChange(map, i, loc, infowindow)
+      })
     console.log(window.markers)
   }
 
