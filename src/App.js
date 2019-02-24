@@ -11,13 +11,7 @@ class App extends Component {
    * Initial state "startingPlaces" so the map component has locations passed in as props to iterate over on and create markers and infowindows, even if there's no internet connection
    */
   state = {
-    startingPlaces: [
-      {venue: {location: {lat: -22.903260, lng: -43.112730}, categories: [{shortName: "Store"}], name: "Tem Tudo", description: "Utilities Shop"}, referralId: 10},
-      {venue: {location: {lat: -22.907294, lng: -43.110322}, categories: [{shortName: "Hardware Store"}], name: "Casa Moreira e Souza", description: "Construction Shop"}, referralId: 12},
-      {venue: {location: {lat: -22.907929, lng: -43.108769}, categories: [{shortName: "Leather Repair"}], name: "Fix Shoes and Purses", description: "Leather work"}, referralId: 23},
-      {venue: {location: {lat: -22.903667, lng: -43.113935}, categories: [{shortName: "Drugstore"}], name: "Raia Drugstore", description: "Drugstore"}, referralId: 34},
-      {venue: {location: {lat: -22.904811, lng: -43.111082}, categories: [{shortName: "Produce Shop"}], name: "Recanto do Jambeiro", description: "Produce Shop"}, referralId: 45}
-    ],
+    startingPlaces: [],
     mapCalled: 0,
     query: "",
     alreadyCalled: false,
@@ -111,8 +105,7 @@ class App extends Component {
 /* ######################## ENDS HERE: MARKERS & INFOWINDOW ########################*/
 
   render() {
-    setTimeout(() => console.log(window.map), 2000)
-    
+
     const { query } = this.state
     let locations = []
     if(query.length > 0) {
