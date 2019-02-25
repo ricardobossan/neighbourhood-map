@@ -23,6 +23,7 @@ class Map extends Component {
    */
   loadMarkers = (map, locations) => {
     const infowindow = new window.google.maps.InfoWindow()
+    infowindow.close()
     window.markers.forEach(marker => marker.setMap(null))
     const image = {
       url: "https://prnautica.com/wp-content/uploads/2015/12/map-marker-icon.png",
@@ -53,6 +54,7 @@ class Map extends Component {
           </div>`
           )
           this.props.infoWindow == true ? infowindow.open(map, i) : console.log("False")
+          infowindow.length = 1
         }, 1200)
       }
         // Method call adds Listener for changing InfoWindow's content upon click
@@ -65,19 +67,18 @@ class Map extends Component {
    * Changes InfoWindow's content when that marker is clicked. Uses reverse geocoding
    */
   listenInfoWindowChange = (map, marker, loc, infowindow) => {
-      marker.addListener('click', () => {
-        infowindow.setContent(
-        `<div class="infoWindow">
-          <div class="infoWindowHeader"><strong>${loc.venue.name}</strong></div>
-          <br>
-          <div><strong>Description:</strong> ${loc.venue.categories[0].shortName}</div>
-          <div><strong>Address:</strong> ${loc.venue.location.formattedAddress[0]}, ${loc.venue.location.formattedAddress[1]}</div>
-        </div>`
-        )
-/*        this.props.infoWindow == false ? infowindow.close() : console.log('')
-*/      })
-/*        this.props.infoWindow == true ? infowindow.open(map, marker) : console.log('')
-*/  }
+    marker.addListener('click', () => {
+      infowindow.setContent(
+      `<div class="infoWindow">
+        <div class="infoWindowHeader"><strong>${loc.venue.name}</strong></div>
+        <br>
+        <div><strong>Description:</strong> ${loc.venue.categories[0].shortName}</div>
+        <div><strong>Address:</strong> ${loc.venue.location.formattedAddress[0]}, ${loc.venue.location.formattedAddress[1]}</div>
+      </div>`
+      )
+      this.loadMarkers(window.map, this.props.locations)
+    })
+  }
 
   componentDidMount() {
     window.markers = []
@@ -94,8 +95,15 @@ class Map extends Component {
       })
     } else {
       this.loadAPI()
+
     }
-    setTimeout(() => this.loadMarkers(window.map, this.props.locations), 1000)
+  }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.locations !== prevProps.locations) {
+      setTimeout(() => this.loadMarkers(window.map, this.props.locations), 1000)
+      
+    }
   }
 
   render() {
@@ -108,19 +116,18 @@ class Map extends Component {
     }  
       
     }, 5000)
+/*    setTimeout(() => {
 
+    this.loadMarkers(window.map, this.props.locations)
+
+    }, 1000)
+*/
 
     /**
      * ATENTION!!!!
      */
     // Ensures the markers and infowindows are reloaded when the locations are first updated
-    if(this.props.locations.length !== 5) {      
-    }
-    setTimeout(() => {
 
-    this.loadMarkers(window.map, this.props.locations)
-
-    }, 1000)
 
     return (
       /**

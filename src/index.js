@@ -3,6 +3,8 @@
 
  * @todo
  * ## Map or something
+ *	--> componentDidUpdate(prevProps)
+ *	--> google maps events to trigger offline (navigator.onLine === false) alerts
  *	--> NEW BRANCH: may pass a callback from App into Map, which will trigger a method App.this.handleMarkerInfo(infowindow, markers) para que esses 2 argumentos (usando bind em maps, talvez) possam ser referenciados em Map e atualizados em App. Aí em 
  * @todo
  * ## Offline Use
