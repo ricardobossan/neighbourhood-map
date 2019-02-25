@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 
-
 class Map extends Component {
+
+  state = {
+    mapWasCalled: false
+  }
+
   /**
    * Loads Google Maps API, creates an instance of a map and an InfoWindow.
    */
@@ -99,29 +103,28 @@ class Map extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
+/*  componentDidUpdate(prevProps) {
     if(this.props.locations !== prevProps.locations) {
       setTimeout(() => this.loadMarkers(window.map, this.props.locations), 1000)
       
     }
   }
-
+*/
   render() {
     /**
      * lets the user know if there's no internet connection to display the map.
      */
-    setTimeout(() => {
-    if(navigator.onLine === false) {
-      this.props.onMapCalled()
+    if(navigator.onLine === false && this.state.mapWasCalled === false) {
+        window.alert("No connection detected. The map may not display properly")
+        this.setState({mapWasCalled: true})      
     }  
-      
-    }, 5000)
-/*    setTimeout(() => {
+          
+    setTimeout(() => {
 
     this.loadMarkers(window.map, this.props.locations)
 
     }, 1000)
-*/
+
 
     /**
      * ATENTION!!!!
