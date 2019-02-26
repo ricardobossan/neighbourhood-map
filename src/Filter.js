@@ -1,3 +1,7 @@
+/**
+ * @file Filter.js
+ */
+
 import React, { Component } from 'react'
 
 /**
@@ -30,4 +34,7 @@ class Filter extends Component {
 	}
 }
 
+/**
+ * @exports Filter
+ */
 export default Filter

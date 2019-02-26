@@ -1,3 +1,7 @@
+/**
+ * @file Map.js
+ */
+
 import React, { Component } from 'react';
 
 /**
@@ -102,40 +106,30 @@ class Map extends Component {
       script.defer = true
       const index = document.getElementsByTagName('script')[0];
       index.parentNode.insertBefore(script, index);
+      // Loads the map, when the script for google maps is loaded.
       script.addEventListener('load', event => {
         this.loadAPI()
       })
     } 
   }
   render() {
-    /**
-     * lets the user know if there's no internet connection to display the map.
-     */
+    // lets the user know if there's no internet connection to display the map.
     if(navigator.onLine === false && this.state.mapWasCalled === false) {
         window.alert("No connection detected. The map may not display properly")
         this.setState({mapWasCalled: true})      
     }  
-          
+    // Reloads markers after each rerender, with it's updated locations
     setTimeout(() => {
-
-    this.loadMarkers(window.map, this.props.locations)
-
+      this.loadMarkers(window.map, this.props.locations)
     }, 1000)
 
-
-    /**
-     * ATENTION!!!!
-     */
-    // Ensures the markers and infowindows are reloaded when the locations are first updated
-
-
     return (
-      /**
-       * Renders map
-       */
       <section className={this.props.mapId} style={{height: "95vh"}} id={this.props.mapId} aria-label={this.props.mapId}/>
     );
   }
 }
 
+/**
+ * @exports Map
+ */
 export default Map

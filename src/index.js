@@ -1,6 +1,6 @@
 /**
  * # TODOS - [PROJECT SPECIFICATION](https://review.udacity.com/#!/rubrics/1351/view):
-
+ *
  * @todo
  * ## Offline Use
  *	DONE --> Made locations available offline with localStorage
@@ -15,7 +15,7 @@
  * @todo
  * ## FINISH
  *  DONE --> refine style
- *  --> comment the whole thing
+ *  DONE --> comment the whole thing
  *  --> complete README
  *    --> Credits due:
  *       - [Traversy Media' Youtube Channel for Crash Course on Bulma CSS Framework](https://www.youtube.com/watch?v=IiPQYQT2-wg)
@@ -68,5 +68,6 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 /**
  * Registers service worker
+ * @func
  */
 serviceWorker.register()
