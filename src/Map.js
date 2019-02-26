@@ -68,6 +68,7 @@ class Map extends Component {
             <br>
             <div><strong>Description:</strong> ${loc.venue.categories[0].shortName}</div>
             <div><strong>Address:</strong> ${loc.venue.location.formattedAddress[0]}, ${loc.venue.location.formattedAddress[1]}</div>
+            <div><strong>Provided by: </strong>SquareSpace</div>
           </div>`
           )
           this.props.infoWindow == true ? infowindow.open(map, i) : console.log("False")
@@ -90,6 +91,8 @@ class Map extends Component {
         <br>
         <div><strong>Description:</strong> ${loc.venue.categories[0].shortName}</div>
         <div><strong>Address:</strong> ${loc.venue.location.formattedAddress[0]}, ${loc.venue.location.formattedAddress[1]}</div>
+        <div><strong>Provided by: </strong>SquareSpace</div>
+
       </div>`
       )
     })

@@ -20,7 +20,8 @@
  *    DONE --> Credits due:
  *       - [Traversy Media' Youtube Channel for Crash Course on Bulma CSS Framework](https://www.youtube.com/watch?v=IiPQYQT2-wg)
  *       - [Prnautica.com, for marker icon](https://prnautica.com/wp-content/uploads/2015/12/map-marker-icon.png)
- *  --> review rubric
+ *  --> DONE review rubric
+ *	--> npm run build
  *  --> send project for review
  *
  * @todo
