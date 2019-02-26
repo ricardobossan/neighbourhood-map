@@ -12,11 +12,17 @@ import './App.css';
 class App extends Component {
 
   state = {
+    // Holds full list of locations.
     startingPlaces: [],
+    // Holds currently typed value on the searchbar (both desktop and mobile viewports).
     query: "",
+    // When set to 'true' (by this.handleAlreadyCalled() method), prevent's infinite alerts.
     alreadyCalled: false,
+    // When set to 'true' (by this.handleBadConnectionCalled() method), prevent's infinite alerts.
     badConnectionCalled: false,
+    // When set to 'true' (by this.handleLocFocus() and this.handleDatalistFocus() methods), show's infowindow.
     infoWindow: false,
+    // Sets it's value to the focused location's referral ID on the sidemenu bar (<aside>)
     focusedLoc: ""
   }
 
@@ -93,7 +99,7 @@ class App extends Component {
   }
 
   /**
-   * 
+   * Shows the infowindow of the last selected location once the datalist is focused (mobile viewport).
    * @method
    */
   handleDatalistFocus = () => {
@@ -101,7 +107,7 @@ class App extends Component {
   }
 
   /**
-   *
+   * Hides the infowindow once the datalist lose focus (mobile view).
    * @method
    */
   handleDatalistBlur = () => {
@@ -109,13 +115,13 @@ class App extends Component {
   }
 
   /**
-   *
+   * Stop alerts from being infinitelly called on the same query value on the search bar, when there's no matching location stored.
    * @method
    */
   handleAlreadyCalled = () => this.setState({alreadyCalled: true})
 
   /**
-   *
+   * Stop alerts from being infinitelly called on the same query value on the search bar, when there's no matching location stored and there's also no connection detected.
    * @method
    */
   handleBadConnectionCalled = () => this.setState({badConnectionCalled: true})
@@ -123,6 +129,8 @@ class App extends Component {
   render() {
 
     const { query } = this.state
+
+    // Uses RegEx to filter searchbox's input (both on mobile and desktop viewports)
     let locations = []
     if(query.length > 0) {
       const match = new RegExp(escRegExp(query, 'i'))
@@ -135,11 +143,21 @@ class App extends Component {
         window.alert("The location you're looking for was not found.")
         this.handleAlreadyCalled()
       /* Call handlers to alert to the user if a offline word search finds no locations, if the search for that word wasn't just made */
-      } else if(query.length !== 0 && navigator.onLine === false && locations.length === 0 && this.state.badConnectionCalled === false) {
+      } else if (query.length !== 0 && navigator.onLine === false && locations.length === 0 && this.state.badConnectionCalled === false) {
         window.alert("Please check your connection.")
         this.handleBadConnectionCalled()
       }      
 
+    // <Filter>: Custom React Component for searchbox (desktop) and datalist (mobile), located in the header.
+    // <Filter locations>: Passes locations filtered true on this.state.query (searchbar's user input value).
+    // <aside>: Sidebar menu for displaying filtered locations.
+    // Locations.map(): Iterates over filtered locations to make them buttons for displaying the respective infowindow.
+    // button[className="buttonButton is-small is-danger]: Button For displaying the full location list again on the sidebar menu.
+    // button[className="buttonButton is-small is-danger].style: Ensures the back button is not shown when the sidebar menu shows all stored locations.
+    // <Map>: Custom React Component for displaying the map.
+    // <Map locations>: Passes locations filtered true on this.state.query (searchbar's user input value).
+    // <Map focusedLoc>: Passes the location's referral id that is currently selected on the sidebar menu (desktop view) so the bounce animation can be shown on the respective marker.
+    // <Map infoWindow>: Passes infowindow's status (true/false, i.e.: open/closed)
     return (
       <div className="App">
         <Filter
@@ -152,7 +170,6 @@ class App extends Component {
           <aside className="menu column is-2-desktop is-hidden-touch" style={{overflowY: "scroll", scrollBehavior: "smooth"}} aria-label="locations returned from the search">
             <ul className="menu-list">
               {
-
               locations.map(location => <li
                 key={location.venue.name + location.referralId}
                 onFocus={() => this.handleLocFocus(location)}
@@ -165,8 +182,7 @@ class App extends Component {
                 <button className="button is-small is-danger"
                 onKeyPress={() => this.handleBackButtonInput()}
                 onClick={() => this.handleBackButtonInput()}
-
-                style={(locations.length === 5 | locations.length === 11 | locations.length === 30)
+                style={(locations.length === 11 | locations.length === 30)
                   ? {display:"none", tabIndex: 0}
                   : {tabIndex: 0}}>Back</button>
               </li>
