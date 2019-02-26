@@ -1,3 +1,27 @@
+# Neighbourhood Map
+
+App for navigating through my neighbourhood's locations.
+
+## Credits Due
+
+* [Traversy Media' Youtube Channel for Crash Course on Bulma CSS Framework](https://www.youtube.com/watch?v=IiPQYQT2-wg)
+* [Prnautica.com, for marker icon](https://prnautica.com/wp-content/uploads/2015/12/map-marker-icon.png)
+
+## How to use the App
+
+### Desktop Viewport
+
+Tab through or click on a location displayed on the sidebar menu to show it's associated information upon it's marker on the map. Also, perform a search by typing words on the search bar, to see if a matching a location in the neighbourhood is returned on the sidebar!
+
+### Mobile Viewport
+
+There are two ways to navigate the app:
+
+* Text Input: type words on the search bar, then scroll through the resulting locations displayed. Touch any of them to see associated information. To perform another search, erase the words seen on the search bar's text input with the backspace button of your virtual keybord.
+* Inverted Triangle Button: Touch the search bar to display a inverted triangle button. Touch it to scroll through neighbourhood's locations. Touch a location to see it's location be the only one remaining and do a bounce animation, while showing the locations details. The search bar should now be filled by the selected location's name. Erase it by hiting the backspace button on your virtual keyboard to restore the whole location list upon input on the inverted triangle button, or to perform a search based on typing a word on the search bar text area.
+
+## Project's Bootstrapp
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
