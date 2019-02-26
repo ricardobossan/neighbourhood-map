@@ -5,6 +5,10 @@ import Filter from './Filter.js'
 import Map from "./Map.js"
 import './App.css';
 
+/**
+ * Main component. Hub for components.
+ * @class
+ */
 class App extends Component {
 
   /**
@@ -12,7 +16,6 @@ class App extends Component {
    */
   state = {
     startingPlaces: [],
-    mapCalled: 0,
     query: "",
     alreadyCalled: false,
     badConnectionCalled: false,
@@ -57,7 +60,7 @@ class App extends Component {
    * 
    */
   handleFilter = (query) => {
-    this.setState({ query: query.trim(), alreadyCalled: false, badConnectionCalled: false, mapCalled: false })
+    this.setState({ query: query.trim(), alreadyCalled: false, badConnectionCalled: false})
   }
 
   handleLocFocus = (location) => {
@@ -73,7 +76,7 @@ class App extends Component {
   }
 
   handleBackButtonInput = () => {
-    this.setState({query: "", alreadyCalled: false, badConnectionCalled: false, mapCalled: false })
+    this.setState({query: "", alreadyCalled: false, badConnectionCalled: false})
     this.getDetailsAPI()
   }
 
@@ -85,24 +88,9 @@ class App extends Component {
     this.setState({infoWindow: false})
   }
 
-  /* Methods below are dedicated to avoiding infinite alert repetition on on loading Map or Locations */
-  handleMapCalled = () => {
-    this.setState((prevState) => ({mapCalled: prevState.mapCalled + 1}))
-    if(this.state.mapCalled === 5000) {
-      window.alert("The map may not be displayed. Please check your connection.")
-      this.setStsate({mapCalled: 0})
-    }
-  }
-
   handleAlreadyCalled = () => this.setState({alreadyCalled: true})
 
   handleBadConnectionCalled = () => this.setState({badConnectionCalled: true})
-
-/* ######################## STARTS HERE: MARKERS & INFOWINDOW ########################*/
-
-
-
-/* ######################## ENDS HERE: MARKERS & INFOWINDOW ########################*/
 
   render() {
 
@@ -114,15 +102,15 @@ class App extends Component {
     } else {
         locations = this.state.startingPlaces
       }
-    /* Call handlers to alert to the user if a online word search finds no locations, if the search for that word wasn't just made */
-    if(navigator.onLine === true && locations.length === 0 && this.state.alreadyCalled === false) {
-      window.alert("The location you're looking for was not found.")
-      this.handleAlreadyCalled()
-    /* Call handlers to alert to the user if a offline word search finds no locations, if the search for that word wasn't just made */
-    } else if(navigator.onLine === false && locations.length === 0 && this.state.badConnectionCalled === false) {
-      window.alert("Please check your connection.")
-      this.handleBadConnectionCalled()
-    }
+      /* Call handlers to alert to the user if a online word search finds no locations, if the search for that word wasn't just made */
+      if(navigator.onLine === true && locations.length === 0 && this.state.alreadyCalled === false) {
+        window.alert("The location you're looking for was not found.")
+        this.handleAlreadyCalled()
+      /* Call handlers to alert to the user if a offline word search finds no locations, if the search for that word wasn't just made */
+      } else if(navigator.onLine === false && locations.length === 0 && this.state.badConnectionCalled === false) {
+        window.alert("Please check your connection.")
+        this.handleBadConnectionCalled()
+      }      
 
     return (
       <div className="App">
@@ -163,7 +151,6 @@ class App extends Component {
               zoom: 15
             }}
             locations={locations}
-            onMapCalled={this.handleMapCalled.bind(this)}
             focusedLoc={this.state.focusedLoc}
             infoWindow={this.state.infoWindow}
           />         

@@ -2,19 +2,13 @@
  * # TODOS - [PROJECT SPECIFICATION](https://review.udacity.com/#!/rubrics/1351/view):
 
  * @todo
- * ## Map or something
- *	--> componentDidUpdate(prevProps)
- *	--> google maps events to trigger offline (navigator.onLine === false) alerts
- *	--> NEW BRANCH: may pass a callback from App into Map, which will trigger a method App.this.handleMarkerInfo(infowindow, markers) para que esses 2 argumentos (usando bind em maps, talvez) possam ser referenciados em Map e atualizados em App. Aí em 
- * @todo
  * ## Offline Use
  *	DONE --> Made locations available offline with localStorage
  *  DONE --> add working service worker, to have offline content when there's no wifi
  *	DONE --> handle possible lack of functionality due to loss of internet connection with alerts.
- *	--> Alerts for loss of connection for 0 locations and for map load are repeating themselves. Implement the same way I did for search with App.state.alreadyCalled
+ *	DONE --> Alerts for loss of connection for 0 locations and for map load are repeating themselves. Implement the same way I did for search with App.state.alreadyCalled
  *		- Search bar (mobile and desktop)
  *		- Map
- *		- InfoWindow: the alert for map already lets the user know there's no internet connection
  *	OPTIONAL --> Save all information about how to run the site with service worker, in order to make a guide in README.md, with references
  *  OPTIONAL --> WATCH PLAYLIST REACT SERVICE WORKER (my own)
  *	OPTIONAL --> try to get initial data from localStorage (obviously, you'll first have to set localStorage with the fetched foursquare API results)
