@@ -11,32 +11,29 @@ import './App.css';
  */
 class App extends Component {
 
-  /**
-   * Initial state "startingPlaces" so the map component has locations passed in as props to iterate over on and create markers and infowindows, even if there's no internet connection
-   */
   state = {
     startingPlaces: [],
     query: "",
     alreadyCalled: false,
     badConnectionCalled: false,
-    focusedLoc: "",
-    infoWindow: false
+    infoWindow: false,
+    focusedLoc: ""
   }
 
+  // First, call API for locations
   componentDidMount() {
     this.getDetailsAPI()
     }
 
   /**
+   * Calls the Foursquare API, with the locations.
    * @method
-   * Calls the Foursquare API, with the locations 
    */
   getDetailsAPI = () => {
     if(localStorage.locations) {
       this.setState({startingPlaces: JSON.parse(localStorage.locations)})
       return
     }
-
     const endPoint = "https://api.foursquare.com/v2/venues/explore?"
     const parameters = {
       client_id: "NRQZ3OTXP3KJH05HXL3RKRKRTF3WJW4MCNMHZFPIY3HKVWHH",
@@ -54,42 +51,73 @@ class App extends Component {
     .catch(err => console.log(err.response))
   }
 
-
   /**
+   * Once there's user input in the searchbar (Filter.js), it's value is lifted up to this main component, saved in state as 'query', be later used to filter through locations.
    * @method
-   * 
    */
   handleFilter = (query) => {
     this.setState({ query: query.trim(), alreadyCalled: false, badConnectionCalled: false})
   }
 
+  /**
+   * Ensures that the infowindow is shown only in the location currently on focus (passed in as argument) in the sidebar menu of the location list, in the desktop viewport.
+   * @method
+   */
   handleLocFocus = (location) => {
     this.setState({focusedLoc: location.referralId, infoWindow: true})
   }
 
+  /**
+   * Ensures that once a location on the sidebar (desktop viewport) loses focus, it's infowindow will no longer show.
+   * @method
+   */
   handleBlur = (location) => this.setState({infoWindow: false})
 
+  /**
+   * Pressing or clicking a location on the sidebar menu (viewport desktop) will selecte it, so only that will be shown on the sidebar.
+   * @method
+   */
   handleLocButtonInput = (location) => {
     let arrayOfOneLoc = []
     arrayOfOneLoc.push(location)
     this.setState({startingPlaces: arrayOfOneLoc})
   }
 
+  /**
+   * Click or press on the back button restores full locations list on the sidebar menu (desktop viewport).
+   * @method
+   */
   handleBackButtonInput = () => {
     this.setState({query: "", alreadyCalled: false, badConnectionCalled: false})
     this.getDetailsAPI()
   }
 
+  /**
+   * 
+   * @method
+   */
   handleDatalistFocus = () => {
     this.setState({infoWindow: true})
   }
 
+  /**
+   *
+   * @method
+   */
   handleDatalistBlur = () => {
     this.setState({infoWindow: false})
   }
 
+  /**
+   *
+   * @method
+   */
   handleAlreadyCalled = () => this.setState({alreadyCalled: true})
 
+  /**
+   *
+   * @method
+   */
   handleBadConnectionCalled = () => this.setState({badConnectionCalled: true})
 
   render() {
@@ -103,11 +131,11 @@ class App extends Component {
         locations = this.state.startingPlaces
       }
       /* Call handlers to alert to the user if a online word search finds no locations, if the search for that word wasn't just made */
-      if(navigator.onLine === true && locations.length === 0 && this.state.alreadyCalled === false) {
+      if(query.length !== 0 && navigator.onLine === true && locations.length === 0 && this.state.alreadyCalled === false) {
         window.alert("The location you're looking for was not found.")
         this.handleAlreadyCalled()
       /* Call handlers to alert to the user if a offline word search finds no locations, if the search for that word wasn't just made */
-      } else if(navigator.onLine === false && locations.length === 0 && this.state.badConnectionCalled === false) {
+      } else if(query.length !== 0 && navigator.onLine === false && locations.length === 0 && this.state.badConnectionCalled === false) {
         window.alert("Please check your connection.")
         this.handleBadConnectionCalled()
       }      
