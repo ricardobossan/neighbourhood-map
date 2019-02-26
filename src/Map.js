@@ -73,6 +73,7 @@ class Map extends Component {
           this.props.infoWindow == true ? infowindow.open(map, i) : console.log("False")
         }, 1200)
       }
+
       // Method call adds Listener for changing InfoWindow's content upon click
       this.listenInfoWindowChange(map, i, loc, infowindow)
     })
@@ -91,7 +92,6 @@ class Map extends Component {
         <div><strong>Address:</strong> ${loc.venue.location.formattedAddress[0]}, ${loc.venue.location.formattedAddress[1]}</div>
       </div>`
       )
-      this.loadMarkers(window.map, this.props.locations)
     })
   }
 
