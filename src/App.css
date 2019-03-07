@@ -3,14 +3,16 @@ body {
 
 header {
   height: 5vh;
+  max-height: 52px;
 }
 
 aside {
-  float:left;
+  float: left;
   height: 95vh;
-/*   left: 100px;
+  /*   left: 100px;
 position: static;
- */}
+ */
+}
 
 .App {
   text-align: center;
